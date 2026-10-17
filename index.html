@@ -1,5 +1,15 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Hidden Ladders Gen 2</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="A 16-bit field guide to Daggerfall Online's hidden numbers: shops, dungeons, metals, loot, guild ranks, enchanting, Renown and holidays, tuned to your Luck, level and Renown.">
+<meta property="og:title" content="DruidHUD: Hidden Ladders">
+<meta property="og:description" content="A 16-bit field guide to Daggerfall Online's hidden numbers: shops, dungeons, metals, loot, guild ranks, enchanting, Renown and holidays, tuned to your Luck, level and Renown.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b1610">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>DruidHUD: Hidden Ladders</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;700&family=Silkscreen&family=VT323&display=swap">
@@ -36,6 +46,9 @@ button{cursor:pointer}
 /* menu bar */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--sunk);box-shadow:0 2px 0 var(--edge),0 4px 0 #000}
 .bar-in{max-width:1080px;margin:0 auto;padding-block:8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;align-items:center;gap:10px}
+.brand{display:flex;align-items:center;gap:8px;flex:none;text-decoration:none;color:var(--gold);font:400 .8rem var(--f-label);letter-spacing:.04em;padding-right:10px;box-shadow:2px 0 0 var(--edge)}
+.brand canvas{width:24px;height:32px}
+@media (max-width:640px){.brand span{display:none}}
 .stavenav{display:flex;gap:4px;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none}
 .stavenav a{display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 6px;text-decoration:none;color:var(--faint);font:400 .58rem var(--f-label);text-transform:uppercase;white-space:nowrap}
 .stavenav a canvas{width:27px;height:27px;opacity:.45}
@@ -55,9 +68,9 @@ button{cursor:pointer}
 .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;padding:14px 18px 18px}
 @media (max-width:820px){.hero{grid-template-columns:1fr}}
 .titlerow{display:flex;gap:14px;align-items:flex-end}
-.titlerow canvas{width:64px;height:80px;margin-top:-50px;flex:none;filter:drop-shadow(0 3px 0 #0a120d)}
+.titlerow canvas{width:60px;height:80px;margin-top:-50px;flex:none;filter:drop-shadow(0 3px 0 #0a120d)}
 .hero h1{font:700 clamp(2rem,6vw,3rem)/1 var(--f-pix);margin:0;text-shadow:3px 3px 0 #0a120d;text-wrap:balance}
-.gen{display:inline-block;font:700 .85rem/1.2 var(--f-pix);color:var(--sunk);background:var(--gold);padding:2px 8px;vertical-align:middle;margin-left:6px;box-shadow:2px 2px 0 #0a120d}
+.gen{text-shadow:none;display:inline-block;font:700 .85rem/1.2 var(--f-pix);color:var(--sunk);background:var(--gold);padding:2px 8px;vertical-align:middle;margin-left:6px;box-shadow:2px 2px 0 #0a120d}
 .kicker{margin:10px 0 0;color:var(--dim)}
 .thesis{display:grid;gap:10px;margin-top:12px;max-width:62ch}
 .thesis p{margin:0}
@@ -284,9 +297,12 @@ select:disabled{opacity:.45}
 @media (prefers-reduced-motion:no-preference){.toast{transition:opacity .2s steps(3),transform .2s steps(3)}}
 .beneath{}
 </style>
+</head>
+<body>
 
 <header class="bar">
   <div class="bar-in">
+    <a class="brand" href="#top" aria-label="DruidHUD, back to top"><canvas id="druidmini" width="16" height="20" aria-hidden="true"></canvas><span>DruidHUD</span></a>
     <nav class="stavenav" id="stavenav" aria-label="Sections"></nav>
     <div class="luckmini" role="group" aria-label="Luck">
       <button type="button" class="pbtn" data-act="luck" data-d="-1" aria-label="Lower Luck">&minus;</button>
@@ -304,7 +320,7 @@ select:disabled{opacity:.45}
       <div>
         <div class="titlerow">
           <canvas id="druid" width="16" height="20" role="img" aria-label="Pixel druid with a leafed staff"></canvas>
-          <h1 id="h-title">Hidden Ladders <span class="gen">Gen 2</span></h1>
+          <div><div class="label" style="margin-bottom:6px">DruidHUD</div><h1 id="h-title">Hidden Ladders <span class="gen">Gen 2</span></h1></div>
         </div>
         <p class="kicker">A field guide to the numbers Daggerfall Online doesn't show you &middot; for [ROSE]</p>
         <div class="thesis">
@@ -396,7 +412,9 @@ select:disabled{opacity:.45}
       </div>
     </div>
     <ul class="whispers">
-      <li><b>Silver works like steel</b> against most foes, but does full damage to every ghost, wraith, vampire and werecreature. Carry one early.</li>
+      <li><b>Silver doubles its damage roll</b> against skeletons, ghosts, wraiths, vampires, mummies, werewolves and wereboars. The double applies to the weapon's own roll, before Strength and metal bonuses are added. Carry one early. (Thanks, Cruor.)</li>
+      <li><b>Skeletons take half damage from edged weapons.</b> Maces, flails and warhammers hit them whole, and a silver one doubles on top.</li>
+      <li>Ancient vampires need mithril or better and don't take silver's double.</li>
       <li><b>Fists and spells ignore metal requirements</b> completely.</li>
       <li>Silver and adamantium hold more enchantment than mithril.</li>
       <li>Leather armour is 3 and chain is 6. Shields ignore metal: buckler 1, round 2, kite 3, tower 4.</li>
@@ -481,8 +499,9 @@ select:disabled{opacity:.45}
       <div class="bgroup"><span class="label">Trapped souls &middot; add room</span><div class="chips" id="b-souls"></div></div>
     </div>
     <ul class="whispers">
-      <li><b>One Daedra Lord's soul adds 8,000 room,</b> more than three amulets' worth.</li>
-      <li>Up to 10 lines total, side effects and souls included. Costs 10 gold for every point of powers. Side effects and souls don't lower the gold.</li>
+      <li><b>Souls aren't equal per line.</b> Some souls drag forced lines in with them. A Daedra Lord's soul adds 8,000 room but takes 4 of your 10 lines, makes you take damage in holy places, and adds Potent vs Daedra to the gold bill. A Dragonling's soul adds 5,000 and takes 1 line, so it's usually the better pick. (Thanks, Cruor.)</li>
+      <li>Souls with no forced lines: Dragonling, Ancient Lich, Vampire. Souls with them: Daedra Lord, Daedra Seducer (5 extra lines), Lich, Fire Daedra, Frost Daedra, Daedroth, Ghost, Wraith.</li>
+      <li>Up to 10 lines total, side effects, souls and forced lines included. Costs 10 gold for every point of powers, forced powers too. Side effects and souls don't lower the gold, and forced lines don't add room.</li>
       <li>The newer armour types, like brigandine, can hold less than these numbers. Check the total the enchanter shows you.</li>
       <li><b>Cast When Held</b> spells wear the item a little as long as it's worn. Pieces with Repairs Objects now mend everything you wear by 2% a tick.</li>
       <li>Spell strength follows character level. Spell cost follows your skill in its school: (110 &minus; skill) &divide; 400 of its gold price, never under 5. Range costs &times;1.5, an area &times;2, an area at range &times;2.5.</li>
@@ -548,7 +567,7 @@ select:disabled{opacity:.45}
   </section>
 
   <footer class="colophon">
-    <p class="sig">Kept by Dryw, druid of the Ilessan Hills, for whoever walks the Bay with us.</p>
+    <p class="sig">A DruidHUD guide, kept by Dryw, druid of the Ilessan Hills, for whoever walks the Bay with us.</p>
     <p>Read from the game's own code. Where odds move with Luck, level or Renown, they move here too. Shop shelves and metal drops were rolled 60,000 times per band using the game's own functions. Shop prices are for a 1,000-gold item, from a sharp haggler (Mercantile 60, Personality 70) to a dull one (20 and 50). The game updates often, so a number here can drift; when the game and this page disagree, trust the game.</p>
     <p>Your settings and progress stay in your own browser.</p>
   </footer>
@@ -578,6 +597,10 @@ window.PIX = {
 window.paintIcons = function(root){ (root || document).querySelectorAll('canvas[data-icon]').forEach(cv => { const i = PIX[cv.dataset.icon]; if (i) paintPix(cv, i.map, i.pal); }); };
 (function(){
   paintPix(document.getElementById('druid'), [
+    "..l......kkk",".lll....kGGGk","lylll..kGGgggk",".lll..kGgkkkgk","..w...kgksesk","..w...kgkssSk","..w..kggkkkkgk","..wkkgggbbbggk","..wsbbgbbBbbgk","..wskbbbBBbbbk",
+    "..w.kbbbyBbbbk","..w.kbyyyyybbk","..w.kbbbBbbbbk","..w.kbbbBbbbbk","..w.kbbBBbbbbk","..w.kbbbbbbbbbk","..w.kkbbbbbbbbk","..w..kkkkkkkkk","..w..kwk...kwk","..k..kkk...kkk"],
+    {k:"#0a120d",G:"#6fae4f",g:"#3f7a3a",s:"#e2b58a",S:"#b9835b",e:"#0a120d",b:"#6b4a2b",B:"#9a6f3f",w:"#8b5a2b",l:"#9bd35a",y:"#f2c94c"});
+  paintPix(document.getElementById('druidmini'), [
     "..l......kkk",".lll....kGGGk","lylll..kGGgggk",".lll..kGgkkkgk","..w...kgksesk","..w...kgkssSk","..w..kggkkkkgk","..wkkgggbbbggk","..wsbbgbbBbbgk","..wskbbbBBbbbk",
     "..w.kbbbyBbbbk","..w.kbyyyyybbk","..w.kbbbBbbbbk","..w.kbbbBbbbbk","..w.kbbBBbbbbk","..w.kbbbbbbbbbk","..w.kkbbbbbbbbk","..w..kkkkkkkkk","..w..kwk...kwk","..k..kkk...kkk"],
     {k:"#0a120d",G:"#6fae4f",g:"#3f7a3a",s:"#e2b58a",S:"#b9835b",e:"#0a120d",b:"#6b4a2b",B:"#9a6f3f",w:"#8b5a2b",l:"#9bd35a",y:"#f2c94c"});
@@ -613,7 +636,7 @@ const MET_ROOM = [0.75,1,1.75,1.25,1.5,1.25,1.75,2,2.5,3];
 const MET_WORD = [
   'The weakest metal. Every picky foe takes less damage from it.',
   'The baseline. Fine for most foes; ghosts, harpies and daedra take less.',
-  'Works like steel on most foes, but does full damage to ghosts, wraiths, vampires and werecreatures.',
+  'Works like steel on most foes, and doubles its damage roll on skeletons, ghosts, wraiths, vampires, mummies and werecreatures.',
   'A small step up from steel. Harpies still need one tier more.',
   'Full damage to harpies. Daedra still take less.',
   'The key metal: full damage to every daedra, lich and ancient vampire.',
@@ -755,13 +778,15 @@ const DRAWS = [
   ['d-decay','Wears out all the time',3000],['d-holy','You take damage in holy places',1000],['d-under','Bad reputation with Underworld',1000],['d-weight','Extra weight',100]
 ];
 const SOULS = [
-  ['s-lord','Daedra Lord',8000],['s-dragonling','Dragonling',5000],['s-alich','Ancient Lich',2500],['s-seducer','Daedra Seducer',1500],
-  ['s-lich','Lich',1000],['s-vampire','Vampire',700],['s-firedaedra','Fire Daedra',500],['s-wraith','Wraith',300]
+  ['s-dragonling','Dragonling',5000,0,0,''],['s-lord','Daedra Lord',8000,3,900,'Potent vs Daedra, You take damage in holy places, Extra weight'],
+  ['s-alich','Ancient Lich',2500,0,0,''],['s-seducer','Daedra Seducer',1500,5,5000,'Good rep with all, Wears out in sunlight, You take damage in holy places, Drains health unless used weekly, Bad reactions from animals'],
+  ['s-lich','Lich',1000,3,900,'Destruction skill bonus, Wears out in sunlight, Low damage vs undead'],['s-vampire','Vampire',700,0,0,''],
+  ['s-firedaedra','Fire Daedra',500,3,2460,'Daedric language bonus, Resist Fire on use, Bad reactions from animals'],['s-wraith','Wraith',300,3,3000,'Regenerate in darkness, Wears out in holy places, Low damage vs undead']
 ];
 const BIND_ALL = {};
 POWERS.forEach(([id,n,c]) => BIND_ALL[id] = {n, c, kind:'take'});
 DRAWS.forEach(([id,n,c]) => BIND_ALL[id] = {n, c, kind:'give'});
-SOULS.forEach(([id,n,c]) => BIND_ALL[id] = {n:n + '’s soul', c, kind:'give'});
+SOULS.forEach(([id,n,c,extra,fg,forced]) => BIND_ALL[id] = {n:n + '’s soul', c, kind:'give', extra, fg, forced});
 
 const STAGES = [
   {name:'Faint', lo:1, hi:9, kept:62.5, heal:8, rp:3},
@@ -806,7 +831,7 @@ const LADDERS = [
 const OMENS = [
   'Shelves count your Luck in whole tens. At 69 you shop like 60.',
   'Buy plain goods in a junk shop. Sell your loot in an incense shop.',
-  'Silver bites every ghost, wraith and vampire at full strength.',
+  'Silver doubles its damage roll on skeletons, ghosts, wraiths, vampires, mummies and werecreatures.',
   'A knight’s Seneschal hands out mithril plate at rank 5.',
   'One Daedra Lord’s soul pays for 8,000 points of enchantment.',
   'In a group, let the highest Renown host the dungeon.',
@@ -1079,16 +1104,20 @@ function renderBinding(){
   const room = Math.round(it[1] * (it[2] ? MET_ROOM[S.emetal] : 1));
   const take = sum(S.bind.filter(id => BIND_ALL[id].kind === 'take').map(id => BIND_ALL[id].c));
   const give = sum(S.bind.filter(id => BIND_ALL[id].kind === 'give').map(id => BIND_ALL[id].c));
-  const cap = room + give, over = take - cap, lines = S.bind.length;
+  const forcedLines = sum(S.bind.map(id => BIND_ALL[id].extra || 0));
+  const forcedGold = sum(S.bind.map(id => BIND_ALL[id].fg || 0));
+  const cap = room + give, over = take - cap, lines = S.bind.length + forcedLines;
   const scale = Math.max(cap, take, 1);
   const fill = $('#fill');
-  fill.classList.toggle('over', over > 0);
+  fill.classList.toggle('over', over > 0 || lines > 10);
   fill.querySelector('.room').style.width = (cap / scale * 100) + '%';
   fill.querySelector('.spend').style.width = (take / scale * 100) + '%';
-  $('#vstat').innerHTML = 'Room <b class="num">' + fmt(room) + '</b>' + (give ? ' + added <b class="num">' + fmt(give) + '</b>' : '') + ' &middot; powers use <b class="num">' + fmt(take) + '</b> &middot; lines <b class="num">' + lines + '/10</b><br>' +
-    (over > 0 ? '<span style="color:var(--rube)">Over by ' + fmt(over) + '. Add a side effect or a soul, or remove a power.</span>' : take === 0 ? 'Nothing added yet. Pick a power.' : '<span style="color:var(--verd)">It fits, with ' + fmt(-over) + ' to spare.</span> Costs ' + fmt(take * 10) + ' gold.') +
-    (!it[2] ? ' Jewellery and clothes ignore metal.' : '');
-  const chip = ([id, n, c]) => { const on = S.bind.includes(id), k = BIND_ALL[id].kind; return '<button type="button" class="chip bchip ' + k + '" data-act="bind" data-k="' + id + '" aria-pressed="' + on + '"' + (!on && lines >= 10 ? ' disabled' : '') + '>' + n + ' <span class="cost num">' + fmt(c) + '</span></button>'; };
+  const tagged = S.bind.filter(id => BIND_ALL[id].forced);
+  $('#vstat').innerHTML = 'Room <b class="num">' + fmt(room) + '</b>' + (give ? ' + added <b class="num">' + fmt(give) + '</b>' : '') + ' &middot; powers use <b class="num">' + fmt(take) + '</b> &middot; lines <b class="num">' + lines + '/10</b>' + (forcedLines ? ' (' + forcedLines + ' forced)' : '') + '<br>' +
+    (lines > 10 ? '<span style="color:var(--rube)">Too many lines (' + lines + ' of 10). Drop something, or swap a soul for one with no forced lines.</span>' : over > 0 ? '<span style="color:var(--rube)">Over by ' + fmt(over) + '. Add a side effect or a soul, or remove a power.</span>' : take === 0 ? 'Nothing added yet. Pick a power.' : '<span style="color:var(--verd)">It fits, with ' + fmt(-over) + ' to spare.</span> Costs ' + fmt((take + forcedGold) * 10) + ' gold' + (forcedGold ? ', including ' + fmt(forcedGold * 10) + ' for forced powers' : '') + '.') +
+    (!it[2] ? ' Jewellery and clothes ignore metal.' : '') +
+    tagged.map(id => '<br><span style="color:var(--ember)">' + esc(BIND_ALL[id].n) + ' also adds: ' + esc(BIND_ALL[id].forced) + '.</span>').join('');
+  const chip = ([id, n, c]) => { const on = S.bind.includes(id), k = BIND_ALL[id].kind, ex = BIND_ALL[id].extra || 0; return '<button type="button" class="chip bchip ' + k + '" data-act="bind" data-k="' + id + '" aria-pressed="' + on + '"' + (!on && lines + 1 + ex > 10 ? ' disabled' : '') + (BIND_ALL[id].forced ? ' title="Also adds: ' + esc(BIND_ALL[id].forced) + '"' : '') + '>' + n + ' <span class="cost num">' + fmt(c) + '</span>' + (ex ? ' <span class="cost num">+' + ex + ' lines</span>' : '') + '</button>'; };
   $('#b-powers').innerHTML = POWERS.map(chip).join('');
   $('#b-draw').innerHTML = DRAWS.map(chip).join('');
   $('#b-souls').innerHTML = SOULS.map(chip).join('');
@@ -1266,7 +1295,7 @@ document.addEventListener('click', (e) => {
   else if (a === 'resetbones') { S.drought = 0; S.recent = []; S.tally = {common:0, magic:0, rare:0, legendary:0}; $('#lastroll').textContent = ''; save(); renderHarvest(); }
   else if (a === 'rank') { S.rank = Math.max(1, Math.min(9, S.rank + Number(t.dataset.d))); save(); plant('doors'); renderDoors(); }
   else if (a === 'rankset') { S.rank = +t.dataset.n; save(); plant('doors'); renderDoors(); }
-  else if (a === 'bind') { const k = t.dataset.k, i = S.bind.indexOf(k); if (i >= 0) S.bind.splice(i, 1); else if (S.bind.length < 10) S.bind.push(k); save(); plant('binding'); renderBinding(); }
+  else if (a === 'bind') { const k = t.dataset.k, i = S.bind.indexOf(k); const used = S.bind.length + sum(S.bind.map(id => BIND_ALL[id].extra || 0)); if (i >= 0) S.bind.splice(i, 1); else if (used + 1 + (BIND_ALL[k].extra || 0) <= 10) S.bind.push(k); save(); plant('binding'); renderBinding(); }
   else if (a === 'party') { S.party = +t.dataset.n; save(); plant('kindling'); renderKindling(); }
   else if (a === 'mark') { const k = t.dataset.k; if (S.marks[k]) delete S.marks[k]; else S.marks[k] = 1; save(); plant('wheel'); renderWheel(); if (S.marks[k]) toast('Marked.'); }
   else if (a === 'ans') answer(+t.dataset.i);
@@ -1293,4 +1322,5 @@ if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude
 })();
 </script>
 
-</body></html>
+</body>
+</html>
