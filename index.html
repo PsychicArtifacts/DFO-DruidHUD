@@ -3,31 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="A 16-bit field guide to Daggerfall Online's hidden numbers: shops, dungeons, metals, loot, guild ranks, enchanting, Renown and holidays, tuned to your Luck, level and Renown.">
+<meta name="description" content="A 32-bit field guide to Daggerfall Online's hidden numbers: shops, towns, dungeons, metals, loot, gems and sockets, guild ranks, crafting writs, enchanting, Renown and holidays, tuned to your Luck, level and Renown.">
 <meta property="og:title" content="DruidHUD: Hidden Ladders">
-<meta property="og:description" content="A 16-bit field guide to Daggerfall Online's hidden numbers: shops, dungeons, metals, loot, guild ranks, enchanting, Renown and holidays, tuned to your Luck, level and Renown.">
+<meta property="og:description" content="A 32-bit field guide to Daggerfall Online's hidden numbers: shops, towns, dungeons, metals, loot, gems and sockets, guild ranks, crafting writs, enchanting, Renown and holidays, tuned to your Luck, level and Renown.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0b1610">
+<meta name="theme-color" content="#0a110c">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>DruidHUD: Hidden Ladders</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;700&family=Silkscreen&family=VT323&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;700&family=Silkscreen&family=VT323&family=Uncial+Antiqua&display=swap">
 <style>
-/* Layout: a 16-bit RPG menu in a night grove. Sticky pixel menu bar of section icons; a banner window with treeline and druid; then one framed window per section, each with its tool in sunk panels and a "good to know" list. Single deliberate night palette. */
+/* Layout: a 32-bit field guide carried by a druid. Sticky bark menu bar of section icons; a moonlit grove banner with a pixel-uncial title; then one cloth-and-bark window per section, each with its tool in shadowed panels and a "good to know" list. One night palette, by choice. */
 :root{
   color-scheme:dark;
-  --night:#0b1610; --win-top:#23452f; --win-bot:#122719; --sunk:#0a120d; --edge:#2f4a35;
-  --ink:#f1ecd2; --dim:#9fb39f; --faint:#6b7f6f;
-  --gold:#f2c94c; --leaf:#9bd35a; --ember:#f0a03a; --sky:#6ea8d8; --blood:#e0573f;
-  --verd:#7fd650; --gilt:#f2c94c; --rube:#e0573f; --masser:#e39b7b; --secunda:#d9e2ef; --bg-sunk:#0a120d; --line-2:#3a5a40;
+  --night:#0a110c; --win-top:#2a3d26; --win-bot:#16241a; --sunk:#0c140f; --edge:#33472f;
+  --ink:#ece3c7; --dim:#a9b596; --faint:#6f7d66;
+  --gold:#e2b04a; --leaf:#a9c76a; --ember:#e08a3a; --sky:#8fb3c9; --blood:#d0583c;
+  --bark:#5a3e27; --bark-hi:#8a6440; --bark-lo:#2e1f13; --moss:#6f8f45; --mist:#c9d6c2; --shade:#050805;
+  --verd:#a9c76a; --gilt:#e2b04a; --rube:#d0583c; --masser:#d9a08a; --secunda:#d9e2ef; --bg-sunk:#0c140f; --line-2:#3d5536;
   --m0:#80858b; --m1:#a7b5c1; --m2:#e2e6ea; --m3:#cdd79b; --m4:#d9a24f; --m5:#8fd3ff; --m6:#9a97c9; --m7:#7a6f9a; --m8:#6f9f4f; --m9:#d2463c;
-  --r0:#d8d2bd; --r1:#6ea8ff; --r2:#f2d04a; --r3:#f0903a; --r4:#8ff0e0; --r5:#d27bff; --r6:#ffe9a0;
+  --r0:#d8d2bd; --r1:#7fb2ff; --r2:#f2d04a; --r3:#f0903a; --r4:#8ff0e0; --r5:#d27bff; --r6:#ff5a63;
   --f-pix:"Pixelify Sans","Trebuchet MS",system-ui,sans-serif;
   --f-label:"Silkscreen","Courier New",monospace;
   --f-num:"VT323","Courier New",monospace;
-  --frame:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' shape-rendering='crispEdges'%3E%3Cg fill='%230a120d'%3E%3Crect x='1' y='0' width='10' height='1'/%3E%3Crect x='1' y='11' width='10' height='1'/%3E%3Crect x='0' y='1' width='1' height='10'/%3E%3Crect x='11' y='1' width='1' height='10'/%3E%3C/g%3E%3Cg fill='%23cfe0a0'%3E%3Crect x='1' y='1' width='10' height='1'/%3E%3Crect x='1' y='10' width='10' height='1'/%3E%3Crect x='1' y='1' width='1' height='10'/%3E%3Crect x='10' y='1' width='1' height='10'/%3E%3C/g%3E%3Cg fill='%23345a3a'%3E%3Crect x='2' y='2' width='8' height='1'/%3E%3Crect x='2' y='9' width='8' height='1'/%3E%3Crect x='2' y='2' width='1' height='8'/%3E%3Crect x='9' y='2' width='1' height='8'/%3E%3C/g%3E%3C/svg%3E");
-  --frame-gold:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' shape-rendering='crispEdges'%3E%3Cg fill='%230a120d'%3E%3Crect x='1' y='0' width='10' height='1'/%3E%3Crect x='1' y='11' width='10' height='1'/%3E%3Crect x='0' y='1' width='1' height='10'/%3E%3Crect x='11' y='1' width='1' height='10'/%3E%3C/g%3E%3Cg fill='%23f2c94c'%3E%3Crect x='1' y='1' width='10' height='1'/%3E%3Crect x='1' y='10' width='10' height='1'/%3E%3Crect x='1' y='1' width='1' height='10'/%3E%3Crect x='10' y='1' width='1' height='10'/%3E%3C/g%3E%3Cg fill='%238a5a12'%3E%3Crect x='2' y='2' width='8' height='1'/%3E%3Crect x='2' y='9' width='8' height='1'/%3E%3Crect x='2' y='2' width='1' height='8'/%3E%3Crect x='9' y='2' width='1' height='8'/%3E%3C/g%3E%3C/svg%3E");
+  --f-title:"Uncial Antiqua",Georgia,serif;
+  --cloth:none; --grain:none; --floor:none;
+  --frame:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='16'%20height='16'%20shape-rendering='crispEdges'%3E%3Crect%20x='0'%20y='1'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='2'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='3'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='4'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='5'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='6'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='7'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='8'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='9'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='10'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='11'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='12'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='13'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='14'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='1'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='1'%20y='1'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='1'%20y='2'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='1'%20y='3'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='1'%20y='4'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='1'%20y='5'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='1'%20y='6'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='1'%20y='7'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='1'%20y='8'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='1'%20y='9'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='1'%20y='10'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='1'%20y='11'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='1'%20y='12'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='1'%20y='13'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='1'%20y='14'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='1'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='2'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='2'%20y='1'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='2'%20y='2'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='2'%20y='3'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='2'%20y='4'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='2'%20y='5'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='2'%20y='6'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='2'%20y='7'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='2'%20y='8'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='2'%20y='9'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='2'%20y='10'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='2'%20y='11'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='2'%20y='12'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='2'%20y='13'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='2'%20y='14'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='2'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='3'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='3'%20y='1'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='3'%20y='2'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='3'%20y='3'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='3'%20y='4'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='3'%20y='5'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='3'%20y='6'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='3'%20y='7'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='3'%20y='8'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='3'%20y='9'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='3'%20y='10'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='3'%20y='11'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='3'%20y='12'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='3'%20y='13'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='3'%20y='14'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='3'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='4'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='4'%20y='1'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='4'%20y='2'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='4'%20y='3'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='4'%20y='4'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='4'%20y='5'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='4'%20y='6'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='4'%20y='7'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='4'%20y='8'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='4'%20y='9'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='4'%20y='10'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='4'%20y='11'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='4'%20y='12'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='4'%20y='13'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='4'%20y='14'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='4'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='5'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='5'%20y='1'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='5'%20y='2'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='5'%20y='3'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='5'%20y='4'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='5'%20y='11'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='5'%20y='12'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='5'%20y='13'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='5'%20y='14'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='5'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='6'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='6'%20y='1'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='6'%20y='2'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='6'%20y='3'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='6'%20y='4'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='6'%20y='11'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='6'%20y='12'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='6'%20y='13'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='6'%20y='14'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='6'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='7'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='7'%20y='1'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='7'%20y='2'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='7'%20y='3'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='7'%20y='4'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='7'%20y='11'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='7'%20y='12'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='7'%20y='13'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='7'%20y='14'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='7'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='8'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='8'%20y='1'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='8'%20y='2'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='8'%20y='3'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='8'%20y='4'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='8'%20y='11'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='8'%20y='12'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='8'%20y='13'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='8'%20y='14'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='8'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='9'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='9'%20y='1'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='9'%20y='2'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='9'%20y='3'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='9'%20y='4'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='9'%20y='11'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='9'%20y='12'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='9'%20y='13'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='9'%20y='14'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='9'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='10'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='10'%20y='1'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='10'%20y='2'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='10'%20y='3'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='10'%20y='4'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='10'%20y='11'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='10'%20y='12'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='10'%20y='13'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='10'%20y='14'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='10'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='11'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='11'%20y='1'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='11'%20y='2'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='11'%20y='3'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='11'%20y='4'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='11'%20y='5'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='11'%20y='6'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='11'%20y='7'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='11'%20y='8'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='11'%20y='9'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='11'%20y='10'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='11'%20y='11'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='11'%20y='12'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='11'%20y='13'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='11'%20y='14'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='11'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='12'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='12'%20y='1'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='12'%20y='2'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='12'%20y='3'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='12'%20y='4'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='12'%20y='5'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='12'%20y='6'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='12'%20y='7'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='12'%20y='8'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='12'%20y='9'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='12'%20y='10'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='12'%20y='11'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='12'%20y='12'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='12'%20y='13'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='12'%20y='14'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='12'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='13'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='13'%20y='1'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='13'%20y='2'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='13'%20y='3'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='13'%20y='4'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='13'%20y='5'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='13'%20y='6'%20width='1'%20height='1'%20fill='%238a6440'/%3E%3Crect%20x='13'%20y='7'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='13'%20y='8'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='13'%20y='9'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='13'%20y='10'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='13'%20y='11'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='13'%20y='12'%20width='1'%20height='1'%20fill='%235a3e27'/%3E%3Crect%20x='13'%20y='13'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='13'%20y='14'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='13'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='14'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='14'%20y='1'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='14'%20y='2'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='14'%20y='3'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='14'%20y='4'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='14'%20y='5'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='14'%20y='6'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='14'%20y='7'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='14'%20y='8'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='14'%20y='9'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='14'%20y='10'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='14'%20y='11'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='14'%20y='12'%20width='1'%20height='1'%20fill='%232e1f13'/%3E%3Crect%20x='14'%20y='13'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='14'%20y='14'%20width='1'%20height='1'%20fill='%236f8f45'/%3E%3Crect%20x='14'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='1'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='2'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='3'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='4'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='5'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='6'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='7'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='8'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='9'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='10'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='11'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='12'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='13'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='14'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3C/svg%3E");
+  --frame-gold:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='16'%20height='16'%20shape-rendering='crispEdges'%3E%3Crect%20x='0'%20y='1'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='2'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='3'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='4'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='5'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='6'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='7'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='8'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='9'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='10'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='11'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='12'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='13'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='0'%20y='14'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='1'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='1'%20y='1'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='1'%20y='2'%20width='1'%20height='1'%20fill='%23dfeab0'/%3E%3Crect%20x='1'%20y='3'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='1'%20y='4'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='1'%20y='5'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='1'%20y='6'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='1'%20y='7'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='1'%20y='8'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='1'%20y='9'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='1'%20y='10'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='1'%20y='11'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='1'%20y='12'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='1'%20y='13'%20width='1'%20height='1'%20fill='%23dfeab0'/%3E%3Crect%20x='1'%20y='14'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='1'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='2'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='2'%20y='1'%20width='1'%20height='1'%20fill='%23dfeab0'/%3E%3Crect%20x='2'%20y='2'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='2'%20y='3'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='2'%20y='4'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='2'%20y='5'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='2'%20y='6'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='2'%20y='7'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='2'%20y='8'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='2'%20y='9'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='2'%20y='10'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='2'%20y='11'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='2'%20y='12'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='2'%20y='13'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='2'%20y='14'%20width='1'%20height='1'%20fill='%23dfeab0'/%3E%3Crect%20x='2'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='3'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='3'%20y='1'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='3'%20y='2'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='3'%20y='3'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='3'%20y='4'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='3'%20y='5'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='3'%20y='6'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='3'%20y='7'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='3'%20y='8'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='3'%20y='9'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='3'%20y='10'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='3'%20y='11'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='3'%20y='12'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='3'%20y='13'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='3'%20y='14'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='3'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='4'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='4'%20y='1'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='4'%20y='2'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='4'%20y='3'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='4'%20y='4'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='4'%20y='5'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='4'%20y='6'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='4'%20y='7'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='4'%20y='8'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='4'%20y='9'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='4'%20y='10'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='4'%20y='11'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='4'%20y='12'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='4'%20y='13'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='4'%20y='14'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='4'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='5'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='5'%20y='1'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='5'%20y='2'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='5'%20y='3'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='5'%20y='4'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='5'%20y='11'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='5'%20y='12'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='5'%20y='13'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='5'%20y='14'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='5'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='6'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='6'%20y='1'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='6'%20y='2'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='6'%20y='3'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='6'%20y='4'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='6'%20y='11'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='6'%20y='12'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='6'%20y='13'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='6'%20y='14'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='6'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='7'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='7'%20y='1'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='7'%20y='2'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='7'%20y='3'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='7'%20y='4'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='7'%20y='11'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='7'%20y='12'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='7'%20y='13'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='7'%20y='14'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='7'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='8'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='8'%20y='1'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='8'%20y='2'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='8'%20y='3'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='8'%20y='4'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='8'%20y='11'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='8'%20y='12'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='8'%20y='13'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='8'%20y='14'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='8'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='9'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='9'%20y='1'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='9'%20y='2'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='9'%20y='3'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='9'%20y='4'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='9'%20y='11'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='9'%20y='12'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='9'%20y='13'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='9'%20y='14'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='9'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='10'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='10'%20y='1'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='10'%20y='2'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='10'%20y='3'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='10'%20y='4'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='10'%20y='11'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='10'%20y='12'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='10'%20y='13'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='10'%20y='14'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='10'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='11'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='11'%20y='1'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='11'%20y='2'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='11'%20y='3'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='11'%20y='4'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='11'%20y='5'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='11'%20y='6'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='11'%20y='7'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='11'%20y='8'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='11'%20y='9'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='11'%20y='10'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='11'%20y='11'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='11'%20y='12'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='11'%20y='13'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='11'%20y='14'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='11'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='12'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='12'%20y='1'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='12'%20y='2'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='12'%20y='3'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='12'%20y='4'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='12'%20y='5'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='12'%20y='6'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='12'%20y='7'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='12'%20y='8'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='12'%20y='9'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='12'%20y='10'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='12'%20y='11'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='12'%20y='12'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='12'%20y='13'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='12'%20y='14'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='12'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='13'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='13'%20y='1'%20width='1'%20height='1'%20fill='%23dfeab0'/%3E%3Crect%20x='13'%20y='2'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='13'%20y='3'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='13'%20y='4'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='13'%20y='5'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='13'%20y='6'%20width='1'%20height='1'%20fill='%23f2d27a'/%3E%3Crect%20x='13'%20y='7'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='13'%20y='8'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='13'%20y='9'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='13'%20y='10'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='13'%20y='11'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='13'%20y='12'%20width='1'%20height='1'%20fill='%23b8862a'/%3E%3Crect%20x='13'%20y='13'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='13'%20y='14'%20width='1'%20height='1'%20fill='%23dfeab0'/%3E%3Crect%20x='13'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='14'%20y='0'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='14'%20y='1'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='14'%20y='2'%20width='1'%20height='1'%20fill='%23dfeab0'/%3E%3Crect%20x='14'%20y='3'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='14'%20y='4'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='14'%20y='5'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='14'%20y='6'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='14'%20y='7'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='14'%20y='8'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='14'%20y='9'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='14'%20y='10'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='14'%20y='11'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='14'%20y='12'%20width='1'%20height='1'%20fill='%236e4a10'/%3E%3Crect%20x='14'%20y='13'%20width='1'%20height='1'%20fill='%23dfeab0'/%3E%3Crect%20x='14'%20y='14'%20width='1'%20height='1'%20fill='%23a9c76a'/%3E%3Crect%20x='14'%20y='15'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='1'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='2'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='3'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='4'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='5'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='6'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='7'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='8'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='9'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='10'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='11'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='12'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='13'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3Crect%20x='15'%20y='14'%20width='1'%20height='1'%20fill='%230b0f0a'/%3E%3C/svg%3E");
 }
 *{box-sizing:border-box}
 html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
@@ -68,9 +70,9 @@ button{cursor:pointer}
 .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;padding:14px 18px 18px}
 @media (max-width:820px){.hero{grid-template-columns:1fr}}
 .titlerow{display:flex;gap:14px;align-items:flex-end}
-.titlerow canvas{width:60px;height:80px;margin-top:-50px;flex:none;filter:drop-shadow(0 3px 0 #0a120d)}
-.hero h1{font:700 clamp(2rem,6vw,3rem)/1 var(--f-pix);margin:0;text-shadow:3px 3px 0 #0a120d;text-wrap:balance}
-.gen{text-shadow:none;display:inline-block;font:700 .85rem/1.2 var(--f-pix);color:var(--sunk);background:var(--gold);padding:2px 8px;vertical-align:middle;margin-left:6px;box-shadow:2px 2px 0 #0a120d}
+.titlerow canvas{width:60px;height:80px;margin-top:-50px;flex:none;filter:drop-shadow(0 3px 0 #050805)}
+.hero h1{font:700 clamp(2rem,6vw,3rem)/1 var(--f-pix);margin:0;text-shadow:3px 3px 0 #050805;text-wrap:balance}
+.gen{text-shadow:none;display:inline-block;font:700 .85rem/1.2 var(--f-pix);color:var(--sunk);background:var(--gold);padding:2px 8px;vertical-align:middle;margin-left:6px;box-shadow:2px 2px 0 #050805}
 .kicker{margin:10px 0 0;color:var(--dim)}
 .thesis{display:grid;gap:10px;margin-top:12px;max-width:62ch}
 .thesis p{margin:0}
@@ -81,8 +83,8 @@ button{cursor:pointer}
 .sig-top output{font:400 1.7rem/1 var(--f-num)}
 .sig-read{margin:0;font-size:.9rem;color:var(--dim)}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:14px;background:var(--sunk);box-shadow:inset 0 0 0 2px var(--edge)}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:22px;background:var(--gold);box-shadow:inset -3px -3px 0 #8a5a12,0 0 0 2px #0a120d;border:0}
-input[type=range]::-moz-range-thumb{width:14px;height:22px;background:var(--gold);box-shadow:inset -3px -3px 0 #8a5a12,0 0 0 2px #0a120d;border:0;border-radius:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:22px;background:var(--gold);box-shadow:inset -3px -3px 0 #6e4a10,0 0 0 2px #050805;border:0}
+input[type=range]::-moz-range-thumb{width:14px;height:22px;background:var(--gold);box-shadow:inset -3px -3px 0 #6e4a10,0 0 0 2px #050805;border:0;border-radius:0}
 .explored{display:grid;gap:6px}
 .seeds{display:flex;flex-wrap:wrap;gap:6px}
 .seed{display:block;padding:3px;background:var(--sunk);box-shadow:inset 0 0 0 2px var(--edge)}
@@ -96,7 +98,7 @@ input[type=range]::-moz-range-thumb{width:14px;height:22px;background:var(--gold
 .ladder{padding:18px;display:grid;gap:16px}
 .shead{display:flex;gap:14px;align-items:center}
 .shead canvas{width:45px;height:45px;flex:none}
-.shead h2{font:700 1.6rem/1.05 var(--f-pix);margin:0;color:var(--leaf);text-shadow:2px 2px 0 #0a120d}
+.shead h2{font:700 1.6rem/1.05 var(--f-pix);margin:0;color:var(--leaf);text-shadow:2px 2px 0 #050805}
 .shead .label{display:block;margin-bottom:2px}
 .lede{margin:0;max-width:70ch;font-size:1.04rem}
 .instrument{display:grid;gap:12px}
@@ -115,7 +117,7 @@ input[type=range]::-moz-range-thumb{width:14px;height:22px;background:var(--gold
 .whispers b{color:var(--gold);font-weight:700}
 .chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .chip{background:var(--sunk);border:0;box-shadow:inset 0 0 0 2px var(--edge);padding:5px 10px;font-size:.92rem}
-.chip[aria-pressed="true"]{background:var(--gold);color:var(--sunk);box-shadow:inset 0 0 0 2px #8a5a12}
+.chip[aria-pressed="true"]{background:var(--gold);color:var(--sunk);box-shadow:inset 0 0 0 2px #6e4a10}
 .chip:disabled{opacity:.4;cursor:not-allowed}
 .meter{display:block;height:10px;background:var(--sunk);box-shadow:inset 0 0 0 2px var(--edge);padding:2px;min-width:40px}
 .meter i{display:block;height:100%;background:var(--c,var(--leaf))}
@@ -156,7 +158,7 @@ details summary{cursor:pointer;color:var(--gold)}
 .mcell{display:grid;gap:2px;min-width:0}
 .mcell small{font-size:.75rem;color:var(--dim)}
 .pips{display:grid;grid-template-columns:repeat(4,7px);gap:2px}
-.pips i{width:7px;height:7px;background:#1c2f22}
+.pips i{width:7px;height:7px;background:#1d2a1c}
 .pips i.on{background:var(--m9)}
 .ddetail{background:#0f1d14;box-shadow:inset 0 0 0 2px var(--gold);padding:12px;display:grid;gap:8px;margin-bottom:6px}
 @media (max-width:560px){.dhead,.drow{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr)} .pips,.dhead span:last-child{display:none}}
@@ -185,9 +187,9 @@ table.carry{border-collapse:collapse;width:100%;min-width:320px}
 .oddrow .pc{font:400 1.3rem var(--f-num);text-align:right}
 .drought{display:grid;gap:4px}
 .bones{display:flex;flex-wrap:wrap;gap:8px}
-.cast{background:var(--gold);color:var(--sunk);border:0;padding:8px 14px;font-weight:700;box-shadow:inset -3px -3px 0 #8a5a12,3px 3px 0 #0a120d}
-.cast.ghost{background:var(--win-top);color:var(--ink);box-shadow:inset 0 0 0 2px var(--edge),3px 3px 0 #0a120d}
-.cast:active{transform:translate(2px,2px);box-shadow:inset -3px -3px 0 #8a5a12}
+.cast{background:var(--gold);color:var(--sunk);border:0;padding:8px 14px;font-weight:700;box-shadow:inset -3px -3px 0 #6e4a10,3px 3px 0 #050805}
+.cast.ghost{background:var(--win-top);color:var(--ink);box-shadow:inset 0 0 0 2px var(--edge),3px 3px 0 #050805}
+.cast:active{transform:translate(2px,2px);box-shadow:inset -3px -3px 0 #6e4a10}
 .lastroll{margin:0;min-height:1.4em;color:var(--gold)}
 .cup{display:flex;flex-wrap:wrap;gap:3px;min-height:14px}
 .cup i{width:12px;height:12px;background:var(--c);box-shadow:inset -2px -2px 0 rgba(0,0,0,.35)}
@@ -235,7 +237,7 @@ select:disabled{opacity:.45}
 /* level & renown */
 .slots{display:grid;grid-template-columns:96px repeat(20,minmax(14px,1fr));gap:2px;min-width:520px;align-items:center}
 .slots .rl{font-size:.78rem;color:var(--dim)}
-.slots i{height:14px;background:#1c2f22}
+.slots i{height:14px;background:#1d2a1c}
 .slots i.on{background:var(--leaf)}
 .slots i.on2{background:var(--sky)}
 .slots i.on3{background:var(--faint)}
@@ -296,13 +298,85 @@ select:disabled{opacity:.45}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 @media (prefers-reduced-motion:no-preference){.toast{transition:opacity .2s steps(3),transform .2s steps(3)}}
 .beneath{}
+
+/* ── Gen 4: the 32-bit grove ─────────────────────────────────────── */
+body{background-color:var(--night);background-image:radial-gradient(ellipse at 50% 18%, transparent 48%, rgba(0,0,0,.55) 100%), var(--floor);background-size:100% 100%, 96px 96px;background-attachment:fixed, scroll;image-rendering:pixelated}
+body::before{background:var(--sunk)}
+.win{border-style:solid;border-width:10px;border-image:var(--frame) 5 / 10px round;background:var(--cloth) 0 0 / 16px 16px repeat, linear-gradient(var(--win-top),var(--win-bot));background-clip:padding-box;box-shadow:5px 5px 0 var(--shade);image-rendering:pixelated}
+.win.gold{border-image:var(--frame-gold) 5 / 10px round}
+.sunk{background:var(--grain) 0 0 / 64px 64px repeat, var(--sunk);box-shadow:inset 0 0 0 2px var(--edge), inset 3px 3px 0 rgba(0,0,0,.4)}
+.bar{background:var(--grain) 0 0 / 64px 64px repeat, var(--sunk);box-shadow:0 2px 0 var(--bark-hi), 0 4px 0 var(--bark), 0 6px 0 var(--bark-lo), 0 8px 0 var(--shade)}
+.brand{color:var(--gold);box-shadow:2px 0 0 var(--bark)}
+.brand canvas{width:24px;height:32px}
+.stavenav a canvas,.seed canvas{width:24px;height:24px}
+.stavenav a{color:var(--faint)}
+.stavenav a.lit{color:var(--leaf)}
+.shead canvas{width:48px;height:48px;filter:drop-shadow(2px 2px 0 var(--shade))}
+.shead h2{font:700 1.65rem/1.05 var(--f-pix);color:var(--leaf);text-shadow:2px 2px 0 var(--shade);text-wrap:balance}
+.banner{padding:0;overflow:hidden}
+.banner canvas.sky{width:100%;max-width:100%;height:auto;aspect-ratio:320/96}
+.titlerow{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap}
+.titlerow #druid{width:72px;height:96px;margin-top:-72px;flex:none;filter:drop-shadow(3px 3px 0 var(--shade))}
+.titleblock{display:grid;gap:6px;min-width:0;flex:1}
+.hero h1{margin:0;font:700 clamp(2rem,6vw,3rem)/1 var(--f-pix);text-shadow:3px 3px 0 var(--shade)}
+.titlerow .title-art{width:min(100%,460px);height:auto;margin:0;flex:none;filter:drop-shadow(3px 3px 0 var(--shade))}
+.hero h1.drawn .title-text{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hero h1:not(.drawn) .title-art{display:none}
+.gen{color:var(--shade);background:var(--gold);box-shadow:2px 2px 0 var(--shade)}
+.genrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.whispers::before{background:var(--leaf);color:var(--shade)}
+.whispers li::before{background:var(--leaf);box-shadow:1px 1px 0 var(--shade)}
+.whispers li.new::after{content:"New";margin-left:8px;font:400 .6rem var(--f-label);color:var(--shade);background:var(--gold);padding:0 5px;vertical-align:2px}
+.rung[aria-pressed="true"]{background:#1f2b14}
+.ddetail{background:#101a12}
+.ans.right{background:#1f3318}
+.ans.wrong{background:#36190f}
+.fill .room{background:repeating-linear-gradient(90deg,#24361f 0 6px,#1b2a18 6px 12px)}
+.cast{box-shadow:inset -3px -3px 0 #6e4a10,3px 3px 0 var(--shade)}
+.toast{box-shadow:inset 0 0 0 2px var(--gold),4px 4px 0 var(--shade)}
+
+/* towns */
+.townread{display:grid;gap:10px;align-content:start;min-width:0}
+.bandrow{display:flex;flex-wrap:wrap;gap:4px}
+.bandrow span{padding:2px 8px;font:400 .66rem var(--f-label);text-transform:uppercase;background:var(--sunk);box-shadow:inset 0 0 0 2px var(--edge);color:var(--faint)}
+.bandrow span.on{background:var(--gold);color:var(--shade);box-shadow:inset 0 0 0 2px #6e4a10}
+.sigrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center}
+.sigrow label{font:400 .74rem var(--f-label);color:var(--gold);text-transform:uppercase}
+.sigrow output{font:400 1.5rem/1 var(--f-num);min-width:3ch;text-align:right}
+.sigrow input{grid-column:1 / -1}
+.factor{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.factor > div{background:var(--sunk);box-shadow:inset 0 0 0 2px var(--edge);padding:8px 10px;display:grid;gap:2px}
+.factor .v{font:400 1.8rem/1 var(--f-num)}
+.factor small{color:var(--dim);font-size:.82rem}
+.up{color:var(--leaf)} .down{color:var(--blood)}
+
+/* gems */
+.gemkinds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+@media (max-width:560px){.gemkinds{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.gemkind{display:flex;gap:8px;align-items:center;background:var(--sunk);border:0;box-shadow:inset 0 0 0 2px var(--edge);padding:6px 8px;text-align:left;font-size:.95rem}
+.gemkind canvas{width:24px;height:24px;flex:none}
+.gemkind[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--gold);color:var(--gold)}
+.lines2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:520px){.lines2{grid-template-columns:1fr}}
+.lines2 > div{background:var(--sunk);box-shadow:inset 0 0 0 2px var(--edge);padding:10px;display:grid;gap:2px}
+.lines2 .v{font:400 1.7rem/1 var(--f-num);color:var(--gold)}
+.lines2 small{color:var(--dim);font-size:.85rem}
+.ladderrow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.ladderrow > span{background:var(--sunk);box-shadow:inset 0 0 0 2px var(--edge);padding:6px 4px;text-align:center;display:grid;gap:2px;font-size:.78rem;color:var(--dim)}
+.ladderrow > span b{font:400 1.25rem/1 var(--f-num);color:var(--ink)}
+.ladderrow > span.on{box-shadow:inset 0 0 0 2px var(--gold)}
+.ladderrow > span.on b{color:var(--gold)}
+table.carry td.dimmed{color:var(--faint)}
+.fams > div{align-content:start}
+#gemkv dd:last-child{font-family:var(--f-pix);font-size:.95rem;line-height:1.4}
+.carry td:first-child{min-width:7.5em}
+
 </style>
 </head>
 <body>
-
 <header class="bar">
   <div class="bar-in">
-    <a class="brand" href="#top" aria-label="DruidHUD, back to top"><canvas id="druidmini" width="16" height="20" aria-hidden="true"></canvas><span>DruidHUD</span></a>
+    <a class="brand" href="#top" aria-label="DruidHUD, back to top"><canvas id="druidmini" width="24" height="32" aria-hidden="true"></canvas><span>DruidHUD</span></a>
     <nav class="stavenav" id="stavenav" aria-label="Sections"></nav>
     <div class="luckmini" role="group" aria-label="Luck">
       <button type="button" class="pbtn" data-act="luck" data-d="-1" aria-label="Lower Luck">&minus;</button>
@@ -315,17 +389,17 @@ select:disabled{opacity:.45}
 <main class="page" id="top">
 
   <section class="win banner" aria-labelledby="h-title">
-    <canvas class="sky" id="grove" width="200" height="44" aria-hidden="true"></canvas>
+    <canvas class="sky" id="grove" width="320" height="96" aria-hidden="true"></canvas>
     <div class="hero">
       <div>
         <div class="titlerow">
-          <canvas id="druid" width="16" height="20" role="img" aria-label="Pixel druid with a leafed staff"></canvas>
-          <div><div class="label" style="margin-bottom:6px">DruidHUD</div><h1 id="h-title">Hidden Ladders <span class="gen">Gen 3</span></h1></div>
+          <canvas id="druid" width="24" height="32" role="img" aria-label="Pixel druid with an oak staff, mistletoe and a gold sickle"></canvas>
+          <div class="titleblock"><div class="genrow"><span class="label">DruidHUD</span><span class="gen">Gen 4</span><span class="label" style="color:var(--dim)">Updated Oct 23</span></div><h1 id="h-title"><canvas id="title-art" class="title-art" aria-hidden="true"></canvas><span class="title-text">Hidden Ladders</span></h1></div>
         </div>
         <p class="kicker">A field guide to the numbers Daggerfall Online doesn't show you &middot; for [ROSE]</p>
         <div class="thesis">
-          <p>The game never says a shop is quality 19 or a dungeon ranks 21. It gives you hints instead: a shop that greets you with incense and soft music, a dungeon called a Coven on the travel map.</p>
-          <p>This guide turns those hints into numbers you can use. Set your Luck, level and Renown on the right, and every section below updates to match your character.</p>
+          <p>The game doesn't tell you a shop is quality 19 or a dungeon ranks 21. It gives you hints instead: a shop that greets you with incense and soft music, a dungeon called a Coven on the travel map.</p>
+          <p>This guide turns those hints into numbers you can use. Set your Luck, level and Renown in the character panel, and every section below updates to match your character.</p>
         </div>
       </div>
       <div class="win charpanel" style="padding:14px" aria-labelledby="h-sigil">
@@ -359,7 +433,7 @@ select:disabled{opacity:.45}
   </section>
 
   <section class="win ladder" id="counter" aria-labelledby="h-counter">
-    <div class="shead"><canvas data-icon="coin" width="9" height="9"></canvas><div><span class="label">Section 1</span><h2 id="h-counter">Shops</h2></div></div>
+    <div class="shead"><canvas data-icon="coin" width="12" height="12"></canvas><div><span class="label">Section 1</span><h2 id="h-counter">Shops</h2></div></div>
     <p class="lede">Every shop tells you its quality in the first line it says when you walk in. There are five tiers. Buy plain goods in the bad shops and sell your loot in the best ones.</p>
     <div class="split">
       <div class="reading sunk">
@@ -373,13 +447,46 @@ select:disabled{opacity:.45}
       <li>Only <b>pawn shops</b> sell magic items, and only from the middle of the Average tier up.</li>
       <li><b>Gem stores</b> need the Good tier for emeralds, and a bit higher for diamonds and sapphires.</li>
       <li><b>Alchemists</b> keep rare ingredients in better shops: Mummy Wrappings, Gryphon Feather and Nymph Hair need the Good tier, Holy Relic needs Best, and Dragon's Scales only the very top of Best. Every alchemist stocks Unicorn Horn, Basilisk Eye and Pearl.</li>
-      <li>Repairing an item doesn't raise what a shop pays for it online. Shops pay for the condition it was in when you found it.</li>
+      <li>Online, a shop pays for a piece at the condition you found it in. <b>A smith's paid repair adds nothing.</b> Your own mending (a Repair Kit, Repairs Objects, a Varla Stone) counts for a third of what it adds.</li>
+      <li class="new"><b>Gem stores, pawn shops and alchemists</b> buy gems. The kind of shop doesn't change the price; its quality does.</li>
+      <li class="new">A town's own economy moves these prices by up to a quarter. See <a href="#market" style="color:var(--gold)">Towns</a>.</li>
       <li>Better shops watch their shelves. A shop's quality adds directly to your chance of getting caught stealing.</li>
     </ul>
   </section>
 
+
+  <section class="win ladder" id="market" aria-labelledby="h-market">
+    <div class="shead"><canvas data-icon="town" width="12" height="12"></canvas><div><span class="label">Section 2</span><h2 id="h-market">Towns</h2></div></div>
+    <p class="lede">Every town has an economy score from 0 to 100. Hover a town on the map to see it. Shops pay the most for your loot when it sits at 50. The further it moves either way, the less they pay: a booming town doesn't need your goods, and a broke one can't afford them.</p>
+    <div class="split">
+      <div class="reading sunk">
+        <p class="prompt">What does the town's card say?</p>
+        <div class="sigrow"><label for="t-prosp">Economy</label><output id="o-prosp" for="t-prosp">76</output><input type="range" id="t-prosp" min="0" max="100" step="1" value="76"></div>
+        <div class="bandrow" id="bandrow"></div>
+        <div class="factor" id="factor"></div>
+        <p class="vstat" id="townprice"></p>
+      </div>
+      <div class="reading sunk">
+        <p class="prompt">How much one player adds</p>
+        <div class="sigrow"><label for="t-walk">Minutes in its streets a day</label><output id="o-walk" for="t-walk">60</output><input type="range" id="t-walk" min="0" max="60" step="5" value="60"></div>
+        <div class="sigrow"><label for="t-sales">Market sales made there a day</label><output id="o-sales" for="t-sales">0</output><input type="range" id="t-sales" min="0" max="10" step="1" value="0"></div>
+        <div class="sigrow"><label for="t-raids">Raids driven off its gates a day</label><output id="o-raids" for="t-raids">0</output><input type="range" id="t-raids" min="0" max="1" step="1" value="0"></div>
+        <p class="verdict" id="townshare"></p>
+        <p class="vstat">Several players add up with diminishing returns. All players together can add about 30 points at most.</p>
+      </div>
+    </div>
+    <ul class="whispers">
+      <li class="new"><b>Money doesn't move a town.</b> Selling to its shops, buying at its guilds or paying for a room adds nothing.</li>
+      <li class="new"><b>Feet do.</b> Time spent out in its streets counts, up to about an hour a day per player. A player-market sale made from the town counts like 8 minutes there, up to ten sales a day. Driving a raid off its gates counts like 40 minutes.</li>
+      <li class="new">Activity fades by a fifth each day and is forgotten after two weeks, so a town needs regular visitors.</li>
+      <li class="new">Every town also rises and falls on two slow waves of its own, 11 and 29 days long. "Market falling" on the card means the waves are dipping, not that anyone did anything.</li>
+      <li class="new">Cities start 6 points up, towns 2 up and villages 2 down. A raid at the gates costs 15. Each sea lane into a port adds 2, up to 6.</li>
+      <li class="new">A guild that holds a town's charter can call an edict: Festival +8, Market Day +6, Open Gates +3, Curfew &minus;4, Levy &minus;6.</li>
+    </ul>
+  </section>
+
   <section class="win ladder" id="descent" aria-labelledby="h-descent">
-    <div class="shead"><canvas data-icon="door" width="9" height="9"></canvas><div><span class="label">Section 2</span><h2 id="h-descent">Dungeons</h2></div></div>
+    <div class="shead"><canvas data-icon="cave" width="12" height="12"></canvas><div><span class="label">Section 3</span><h2 id="h-descent">Dungeons</h2></div></div>
     <p class="lede">The travel map shows each dungeon's type, and the type decides who lives there, what metal drops and how much magic loot you'll find. Metal and magic are ranked separately, so the best place for one isn't always the best for the other.</p>
     <div class="instrument sunk">
       <p class="prompt">What are you after?</p>
@@ -396,12 +503,13 @@ select:disabled{opacity:.45}
       <li><b>Metal and magic are separate rankings.</b> A Giant Stronghold drops weak metal but better magic than a Prison.</li>
       <li>Human Strongholds, Prisons and Ruined Castles scale their metal with <b>your character level</b>, up to a Vampire Haunt's.</li>
       <li>Mines, caves and nests sit at the bottom for metal, however hard they fight.</li>
+      <li class="new">Since Oct 22 the online wilderness has a quarter fewer random dungeons. The ones left are unchanged.</li>
       <li><b>Best farming:</b> Desecrated Temples have the most daedra. Covens have the best metal plus four kinds of daedra. Bring mithril or better.</li>
     </ul>
   </section>
 
   <section class="win ladder" id="forge" aria-labelledby="h-forge">
-    <div class="shead"><canvas data-icon="anvil" width="9" height="9"></canvas><div><span class="label">Section 3</span><h2 id="h-forge">Weapon Metals</h2></div></div>
+    <div class="shead"><canvas data-icon="anvil" width="12" height="12"></canvas><div><span class="label">Section 4</span><h2 id="h-forge">Weapon Metals</h2></div></div>
     <p class="lede">Ten metals, from iron to daedric. Some foes need a minimum metal. Online, a weaker weapon still hits them, but it does 20% less damage for each tier you're short, down to a minimum of 10%.</p>
     <div class="instrument sunk">
       <p class="prompt">What is your weapon made of?</p>
@@ -422,10 +530,10 @@ select:disabled{opacity:.45}
   </section>
 
   <section class="win ladder" id="harvest" aria-labelledby="h-harvest">
-    <div class="shead"><canvas data-icon="gem" width="9" height="9"></canvas><div><span class="label">Section 4</span><h2 id="h-harvest">Loot Rarity</h2></div></div>
+    <div class="shead"><canvas data-icon="pouch" width="12" height="12"></canvas><div><span class="label">Section 5</span><h2 id="h-harvest">Loot Rarity</h2></div></div>
     <p class="lede">Seven rarity tiers, and only the first four drop from enemies. What you kill and where you kill it set the odds. Luck nudges them up or down.</p>
     <div class="rarities" id="rarities"></div>
-    <p class="vstat">The last three never drop at random: Aetheric pieces are a boss's own set, Artifacts are Daggerfall's quest rewards, and Gilded is a single item, the Hourlock.</p>
+    <p class="vstat">The last three don't drop at random: Aetheric pieces are a boss's own set, Artifacts are Daggerfall's quest rewards, and Gilded pieces are three named items from world bosses.</p>
     <div class="instrument sunk">
       <p class="prompt">What did you just kill?</p>
       <div class="chips" id="sources"></div>
@@ -451,12 +559,48 @@ select:disabled{opacity:.45}
       <li><b>Bad-luck protection is real.</b> Every 25 pieces you pick up below Legendary raise your Legendary odds by a fifth, up to triple. Getting one resets it.</li>
       <li>Rare pieces drop unidentified, and <b>their bonuses already work</b> before you identify them.</li>
       <li>Salvaging breaks a piece into Welkynd Shards: Magic 1, Rare 3, Legendary 8, Exalted 15. Each hone on a piece doubles the next hone's price.</li>
+      <li class="new"><b>The three Gilded pieces:</b> the Hourlock (Brass Remnant, 1 in 50), the Dragonfire Oath (Warden of the Burning Gate, 1 in 100) and the Sunken Sovereign (the Old Coil, 1 in 100, to a ship that dealt damage). Since Oct 22 the Sovereign drops as a pistol; sabers already found stay sabers.</li>
       <li>Resistance lines on gear stop at 45% per element. Race and spells stack on top of that.</li>
     </ul>
   </section>
 
+
+  <section class="win ladder" id="gems" aria-labelledby="h-gems">
+    <div class="shead"><canvas data-icon="gem" width="12" height="12"></canvas><div><span class="label">Section 6</span><h2 id="h-gems">Gems &amp; Sockets</h2></div></div>
+    <p class="lede">Gems come in five grades, from Chipped to Perfect. Set one in a socket and it adds a line to the piece: one kind of line in a weapon, another in armor or jewelry.</p>
+    <div class="instrument sunk">
+      <p class="prompt">Pick a gem and a grade</p>
+      <div class="gemkinds" id="gemkinds"></div>
+      <div class="ladderrow" id="gemgrades"></div>
+      <div class="lines2" id="gemlines" aria-live="polite"></div>
+      <dl class="kv" id="gemkv"></dl>
+    </div>
+    <div class="instrument sunk">
+      <p class="prompt">How many sockets a piece can have</p>
+      <div class="scroll"><table class="carry">
+        <thead><tr><th>Piece</th><th class="r">Sockets</th><th>Chance it drops with one</th></tr></thead>
+        <tbody>
+          <tr><td>Armor, shield or jewelry</td><td class="r num">1</td><td>Rare 15% &middot; Legendary 30%</td></tr>
+          <tr><td>Short blade</td><td class="r num">1</td><td rowspan="3">First socket: Magic 12% &middot; Rare about 36% &middot; Legendary about 58%. Each further one: Rare 30%, Legendary 45%, stopping at the first miss.</td></tr>
+          <tr><td>One-handed weapon</td><td class="r num">2</td></tr>
+          <tr><td>Two-handed weapon</td><td class="r num">3</td></tr>
+          <tr><td>Clothes</td><td class="r num dimmed">0</td><td class="dimmed">none</td></tr>
+        </tbody>
+      </table></div>
+      <p class="vstat">A Magic weapon holds one socket at most. Common pieces don’t get one.</p>
+    </div>
+    <ul class="whispers">
+      <li class="new"><b>Sockets are rolled when a piece drops.</b> A piece can't gain one later.</li>
+      <li class="new">Setting a gem is free. <b>Unsetting it destroys the gem.</b> Extracting it whole costs 50 gold for a Chipped gem, up to 800 for a Perfect one.</li>
+      <li class="new"><b>Gems of one kind on one piece stop at a cap:</b> +25% damage, +6 fire or frost, +7% leech, +10 to a stat, +35 resist. Two Perfect Diamonds fill a weapon's damage cap; a third adds only 1%.</li>
+      <li class="new">Only gem stores, pawn shops and alchemists buy gems. Jade, Malachite and Turquoise sell for very little and are worth more in a socket.</li>
+      <li class="new">Every corpse or pile has a small chance at a gem: 1% plus 0.2% per tier, up to 5%, a bit more from piles and bosses, nudged by Luck. Deeper places drop better grades.</li>
+      <li class="new">Bosses carry gems too: the Warden of the Burning Gate 1, the Old Coil 1 (to a ship that dealt damage), the Brass Remnant 2.</li>
+    </ul>
+  </section>
+
   <section class="win ladder" id="doors" aria-labelledby="h-doors">
-    <div class="shead"><canvas data-icon="key" width="9" height="9"></canvas><div><span class="label">Section 5</span><h2 id="h-doors">Guild Ranks</h2></div></div>
+    <div class="shead"><canvas data-icon="key" width="12" height="12"></canvas><div><span class="label">Section 7</span><h2 id="h-doors">Guild Ranks</h2></div></div>
     <p class="lede">Every guild has ten ranks, and every promotion checks the same four things.</p>
     <div class="instrument sunk">
       <p class="prompt">Which rank are you looking at?</p>
@@ -474,13 +618,38 @@ select:disabled{opacity:.45}
       <li>The fastest way to <b>Daedra summoning</b> is the Mages Guild or the Temple of Julianos, both at rank 6.</li>
       <li>A knightly order's Seneschal gives you armour in <b>the metal matching your rank</b>, and you keep one piece. Rank 5 is mithril, the cheapest way to get it.</li>
       <li>Stendarr gives a rank-in-50 chance to <b>survive a killing blow</b>. At rank 9 that's almost one death in five ignored.</li>
-      <li>The Thieves Guild never kicks you out. The Fighters Guild pays 10% more for quests and charges 10% less for repairs with every rank.</li>
+      <li class="new"><b>Crafting writs</b> add 2 standing with the guild that asked, if you've joined it.</li>
+      <li>The Thieves Guild doesn't expel anyone. The Fighters Guild pays 10% more for quests and charges 10% less for repairs with every rank.</li>
       <li>Online, rank 8 and 9 are council chairs, won on merit at each Sunday's Turning. Reputation arrives at most 15 a real day.</li>
     </ul>
   </section>
 
+
+  <section class="win ladder" id="writs" aria-labelledby="h-writs">
+    <div class="shead"><canvas data-icon="writ" width="12" height="12"></canvas><div><span class="label">Section 8</span><h2 id="h-writs">Crafting Writs</h2></div></div>
+    <p class="lede">Every notice board's Work tab posts three crafting writs a day for your whole account: a potion, a dish, and a Repair Kit, or a second potion if none of your characters has smithed. They turn over at midnight UTC.</p>
+    <div class="instrument sunk">
+      <p class="prompt">What a writ asks and pays, by tier</p>
+      <div class="scroll"><table class="carry" id="writtable"></table></div>
+      <p class="vstat">Pay is in silver: what the goods cost to make plus half again, at least 20 a tier and at most 200. Most writs pay the floor. Every writ also pays crafting XP of twice its silver, some Renown, and 2 standing with the guild that asked.</p>
+    </div>
+    <div class="fams" id="writguilds">
+      <div><b>Mages Guild</b><span>Most potions</span></div>
+      <div><b>Temple of Stendarr</b><span>Healing, Heal True, cures and Purification</span></div>
+      <div><b>Fighters Guild</b><span>Orc Strength and Stamina potions, Hunter's Stew, the Fisherman's Supper, every Repair Kit</span></div>
+      <div><b>Temple of Mara</b><span>Tarts and the Feast of the Hearth</span></div>
+    </div>
+    <ul class="whispers">
+      <li class="new"><b>Only what you made counts.</b> Potions you brewed at a station, dishes and kits you crafted. Bought or looted ones don't, and neither do Water Breathing or Levitation potions.</li>
+      <li class="new">Any of your characters can fill a writ with their own goods. Writs are drawn at your best crafter's rank, from your top two tiers.</li>
+      <li class="new">The standing only sticks with a guild you've joined.</li>
+      <li class="new">A Novice's brew makes two potions, and the alchemist's station costs 25 gold a brew.</li>
+      <li class="new"><b>Potions drop less than half as often as before</b>, about 9 in 100 looting foes at Renown 20. Brewing is the steady supply now.</li>
+    </ul>
+  </section>
+
   <section class="win ladder" id="binding" aria-labelledby="h-binding">
-    <div class="shead"><canvas data-icon="rune" width="9" height="9"></canvas><div><span class="label">Section 6</span><h2 id="h-binding">Enchanting</h2></div></div>
+    <div class="shead"><canvas data-icon="stone" width="12" height="12"></canvas><div><span class="label">Section 9</span><h2 id="h-binding">Enchanting</h2></div></div>
     <p class="lede">Every item has a fixed amount of enchantment room. Powers use up room. Side effects and trapped souls add room back.</p>
     <div class="instrument sunk">
       <p class="prompt">Pick an item, then add enchantments.</p>
@@ -504,12 +673,12 @@ select:disabled{opacity:.45}
       <li>Up to 10 lines total, side effects, souls and forced lines included. Costs 10 gold for every point of powers, forced powers too. Side effects and souls don't lower the gold, and forced lines don't add room.</li>
       <li>The newer armour types, like brigandine, can hold less than these numbers. Check the total the enchanter shows you.</li>
       <li><b>Cast When Held</b> spells wear the item a little as long as it's worn. Pieces with Repairs Objects now mend everything you wear by 2% a tick.</li>
-      <li>Spell strength follows character level. Spell cost follows your skill in its school: (110 &minus; skill) &divide; 400 of its gold price, never under 5. Range costs &times;1.5, an area &times;2, an area at range &times;2.5.</li>
+      <li>Spell strength follows character level. Spell cost follows your skill in its school: (110 &minus; skill) &divide; 400 of its gold price, with a floor of 5. Range costs &times;1.5, an area &times;2, an area at range &times;2.5.</li>
     </ul>
   </section>
 
   <section class="win ladder" id="kindling" aria-labelledby="h-kindling">
-    <div class="shead"><canvas data-icon="flame" width="9" height="9"></canvas><div><span class="label">Section 7</span><h2 id="h-kindling">Level &amp; Renown</h2></div></div>
+    <div class="shead"><canvas data-icon="flame" width="12" height="12"></canvas><div><span class="label">Section 10</span><h2 id="h-kindling">Level &amp; Renown</h2></div></div>
     <p class="lede">You have two levels. Character level comes from your skills and decides what spawns, how hard your spells hit and how much gold corpses carry. Renown is the online level, kept on the server: each point adds 3 health and 2 magicka.</p>
     <div class="instrument sunk">
       <p class="prompt">What the game spawns at your level</p>
@@ -526,11 +695,12 @@ select:disabled{opacity:.45}
     <div class="tiers" id="tiers">
       <div class="tier"><h4>Regular</h4><p>Foes as Daggerfall made them. One dungeon in five has a single elite. Respawns in 20 real minutes.</p></div>
       <div class="tier"><h4>Elite</h4><p>&times;2 health, &times;2 damage. Three or four elites at &times;7 health and &times;4 damage. Respawns in 40 minutes.</p></div>
-      <div class="tier abyss"><h4>Abyss</h4><p>Foes level 24 or more at &times;4 health and &times;2.5 damage, elites &times;9 and &times;4.5. Appears 2 to 4 squares from the main city of the busiest region, lasts 48 real hours unless beaten, and collapses 3 minutes after it falls. The next one appears 2 hours later.</p><p><b>Rewards for every fighter:</b> 400 gold per level, a piece that's Legendary one time in four (otherwise Rare), two more Rare or better, a Brass of Numidium piece one time in three, and the Hourlock one time in fifty.</p></div>
+      <div class="tier abyss"><h4>Abyss</h4><p>Foes level 24 or more at &times;4 health and &times;2.5 damage, elites &times;9 and &times;4.5. Appears 2 to 4 squares from the main city of the busiest region, lasts 48 real hours unless beaten, and collapses 3 minutes after it falls. The next one appears 2 hours later.</p><p class="new-p"><b>The Way Through:</b> once anyone steps through the Rift, a portal opens beside everyone in the dungeon and goes straight to the Shattered Hour. It closes when the Brass Remnant falls.</p><p><b>Rewards for every fighter:</b> 400 gold per level, a piece that's Legendary one time in four (otherwise Rare), two more Rare or better, a Brass of Numidium piece one time in three, two gems, and the Hourlock one time in fifty.</p></div>
     </div>
     <ul class="whispers">
       <li><b>Loot is rolled using the host's Renown.</b> In a group, the player with the highest Renown should host the dungeon.</li>
       <li>Class foes (mages, knights, thieves) match your character level, so they give less Renown than a monster in the same fight.</li>
+      <li class="new">Potions drop from foes less than half as often as before. The stage numbers above include the cut.</li>
       <li>An account earns at most 15,000 Renown an hour. Raids pay three quests' worth; Sethrakul pays six.</li>
       <li>Open-world elites are one foe in twenty from level 3: two Magic pieces, a 6% Legendary chance and 20 to 60 gold per level.</li>
       <li>Champions (Mighty, Stalwart, Swift, Vampiric, Thorned) have double health. A Stalwart has triple. They drop better loot.</li>
@@ -538,7 +708,7 @@ select:disabled{opacity:.45}
   </section>
 
   <section class="win ladder" id="wheel" aria-labelledby="h-wheel">
-    <div class="shead"><canvas data-icon="moon" width="9" height="9"></canvas><div><span class="label">Section 8</span><h2 id="h-wheel">Calendar &amp; Holidays</h2></div></div>
+    <div class="shead"><canvas data-icon="moon" width="12" height="12"></canvas><div><span class="label">Section 11</span><h2 id="h-wheel">Calendar &amp; Holidays</h2></div></div>
     <p class="lede">Online, a game day lasts 2 real hours and a game year turns every 30 real days. Money holidays happen for everyone at once. Times below are in your own time zone.</p>
     <div class="instrument sunk">
       <div class="clock">
@@ -548,14 +718,14 @@ select:disabled{opacity:.45}
       <div class="hols" id="hols"></div>
     </div>
     <ul class="whispers">
-      <li>A festival's half price doesn't stack with the online half price on potions, and shops still pay you at most half of full price. <b>You can't flip festival buys for profit.</b></li>
+      <li>A festival's half price doesn't stack with the online half price on potions, and shops still pay you at most half of full price. <b>Festival buys don't flip for profit.</b></li>
       <li>Online, the summoner calls whichever Daedric prince you name, on any day, for 200,000 gold minus 1,000 for every point of their regard. The Glenmoril witches always call Hircine.</li>
       <li>Months in order: Morning Star, Sun's Dawn, First Seed, Rain's Hand, Second Seed, Midyear, Sun's Height, Last Seed, Hearthfire, Frostfall, Sun's Dusk, Evening Star.</li>
     </ul>
   </section>
 
   <section class="win ladder" id="test" aria-labelledby="h-test">
-    <div class="shead"><canvas data-icon="question" width="9" height="9"></canvas><div><span class="label">Section 9</span><h2 id="h-test">Quiz</h2></div></div>
+    <div class="shead"><canvas data-icon="owl" width="12" height="12"></canvas><div><span class="label">Section 12</span><h2 id="h-test">Quiz</h2></div></div>
     <p class="lede">Read the clue, pick the answer. Get five in a row to mark this section explored.</p>
     <div class="instrument sunk">
       <div class="streak"><span>Streak <b id="streak">0</b></span><span>Best <b id="best">0</b></span><span id="title" class="verdict"></span></div>
@@ -567,8 +737,8 @@ select:disabled{opacity:.45}
   </section>
 
   <footer class="colophon">
-    <p class="sig">A DruidHUD guide, kept by Dryw, druid of the Ilessan Hills, for whoever walks the Bay with us.</p>
-    <p>Read from the game's own code. Where odds move with Luck, level or Renown, they move here too. Shop shelves and metal drops were rolled 60,000 times per band using the game's own functions. Shop prices are for a 1,000-gold item, from a sharp haggler (Mercantile 60, Personality 70) to a dull one (20 and 50). The game updates often, so a number here can drift; when the game and this page disagree, trust the game.</p>
+    <p class="sig">A DruidHUD guide, kept by Dryw, druid of the Ilessan Hills, for my Iliac Baes.</p>
+    <p>Gen 4, checked against the game's code on October 23, 2026 (build 10686). Read from the game's own code. Where odds move with Luck, level or Renown, they move here too. Shop shelves and metal drops were rolled 60,000 times per band using the game's own functions. Shop prices are for a 1,000-gold item, from a sharp haggler (Mercantile 60, Personality 70) to a dull one (20 and 50). The game updates often, so a number here can drift; when the game and this page disagree, trust the game. Shop shelves, dungeon metal and loot odds are unchanged since Gen 3; the new sections are Towns, Gems &amp; Sockets and Crafting Writs.</p>
     <p>Your settings and progress stay in your own browser.</p>
   </footer>
 </main>
@@ -576,50 +746,343 @@ select:disabled{opacity:.45}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-/* pixel art: shared by the banner, the menu bar and the section headers */
+/* pixel art: the banner, the druid, the menu icons, and the cloth, grain and forest-floor textures */
+(function(){
+const K = "#050805";
+let seed = 7;
+const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+const BAYER = [[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
+const dith = (x, y, t) => (BAYER[y & 3][x & 3] + 0.5) / 16 < t;
+
 window.paintPix = function(cv, map, pal){
   const h = map.length, w = Math.max(...map.map(r => r.length));
   cv.width = w; cv.height = h;
   const c = cv.getContext('2d'); c.imageSmoothingEnabled = false; c.clearRect(0, 0, w, h);
   map.forEach((row, y) => [...row].forEach((ch, x) => { if (pal[ch]) { c.fillStyle = pal[ch]; c.fillRect(x, y, 1, 1); } }));
 };
+
+/* 12x12 icons: one silhouette, a mid tone, a light and a shade, outlined */
 window.PIX = {
-  coin:{map:["..kkkkk..",".kyyyyyk.","kyYYyyyyk","kyYyyyyyk","kyyyYYyyk","kyyyyyYyk","kyyyyyyyk",".kyyyyyk.","..kkkkk.."],pal:{k:"#0a120d",y:"#f2c94c",Y:"#fff3b0"}},
-  door:{map:[".kkkkkkk.","kbbbbbbbk","kbBbbbBbk","kbBbbbBbk","kbBbbyBbk","kbBbbbBbk","kbBbbbBbk","kbbbbbbbk","kkkkkkkkk"],pal:{k:"#0a120d",b:"#8b5a2b",B:"#5a3a1c",y:"#f2c94c"}},
-  anvil:{map:["kkkkkkkkk","kSSSSSSSk","kkssssskk","..kssk...","..kssk...",".kssssk..","kssssssk.","kkkkkkkk.","........."],pal:{k:"#0a120d",s:"#8a96a3",S:"#d0d8e0"}},
-  gem:{map:["...kkk...","..kcCck..",".kcCccck.","kcCccccck","kccccccck",".kccccck.","..kccck..","...kck...","....k...."],pal:{k:"#0a120d",c:"#4fc3b0",C:"#e6fffb"}},
-  key:{map:[".kkk.....","kyyyk....","kyKyk....","kyyykkkkk",".kkyyyyyk","....kykyk","....k.k.k","........."],pal:{k:"#0a120d",y:"#f2c94c",K:"#0a120d"}},
-  rune:{map:[".kkkkkkk.","kgggggggk","kggPggggk","kgPgPgggk","kggPggPgk","kggggPggk","kgggggggk","kGGGGGGGk",".kkkkkkk."],pal:{k:"#0a120d",g:"#7d8a80",G:"#56625a",P:"#c08cff"}},
-  flame:{map:["....r....","...rr....","...ryr...","..ryyr.r.","..ryYyrr.",".rryYYyr.",".ryYYYyr.","..ryyyr..","...rrr..."],pal:{r:"#e05a2b",y:"#f2a33a",Y:"#ffe08a"}},
-  moon:{map:["...mmm...","..mmM....",".mmM.....",".mM......",".mM......",".mmM.....","..mmM....","...mmmm..","........."],pal:{m:"#f6efc8",M:"#c9c08f"}},
-  question:{map:["..kkkkk..",".kyyyyyk.","kyyk.kyyk","....kyyk.","...kyyk..","...kyk...","...kkk...","...kyk...","...kkk..."],pal:{k:"#0a120d",y:"#9bd35a"}}
+  coin:{map:[
+    "....kkkk....",
+    "..kkyyyykk..",
+    ".kyyYYyyyyk.",
+    ".kyYyyyyyhk.",
+    "kyYyyddyyyhk",
+    "kyyydyydyyhk",
+    "kyyydyydyyhk",
+    "kyyyyddyyyhk",
+    ".kyyyyyyyhk.",
+    ".khyyyyyhhk.",
+    "..kkhhhhkk..",
+    "....kkkk...."],pal:{k:K,y:"#e2b04a",Y:"#f6dc8a",h:"#8a6212",d:"#a87a22"}},
+  town:{map:[
+    ".....kk.....",
+    "....kRRk....",
+    "...kRrrrk...",
+    "..kRrrrrrk..",
+    ".kRrrrrrrrk.",
+    "kkkkkkkkkkkk",
+    ".kwwwwwwwwk.",
+    ".kwyykwbbwk.",
+    ".kwYykwbbwk.",
+    ".kwwwwwbbwk.",
+    ".kWWWWWbbWk.",
+    ".kkkkkkkkkk."],pal:{k:K,R:"#c9a35a",r:"#8a6a34",w:"#d8cba6",W:"#a89a76",y:"#e2b04a",Y:"#f6dc8a",b:"#5a3e27"}},
+  cave:{map:[
+    "............",
+    "....kkkk....",
+    "..kkgGggkk..",
+    ".kgGsssssgk.",
+    ".kGskkkksgk.",
+    "kgskKKKKksgk",
+    "kgskKKKKksgk",
+    "kgskKKKKkssk",
+    "kmmkKKKKkmmk",
+    "kMmmKKKKmmMk",
+    "kkkkkkkkkkkk",
+    "............"],pal:{k:K,g:"#4a5a48",G:"#7d8a70",s:"#5f6a58",K:"#0d120e",m:"#4f6b34",M:"#8fae55"}},
+  anvil:{map:[
+    "............",
+    "kkkkkkkkkkk.",
+    "kSSSSSSSSSkk",
+    "kssssssssssk",
+    "kkksssssskk.",
+    "...kssssk...",
+    "...kssssk...",
+    "..kssssssk..",
+    ".kssssssssk.",
+    ".kddddddddk.",
+    ".kkkkkkkkkk.",
+    "............"],pal:{k:K,S:"#d6dde2",s:"#8a96a3",d:"#56606a"}},
+  pouch:{map:[
+    "....kkkk....",
+    "...kggggk...",
+    "....kyyk....",
+    "..kkbbbbkk..",
+    ".kbBbbbbbbk.",
+    "kbBbbbbbbbbk",
+    "kbBbblLbbbbk",
+    "kbbbblLlbbbk",
+    "kbbbbblbbbdk",
+    ".kbbbbbbbdk.",
+    "..kkddddkk..",
+    "....kkkk...."],pal:{k:K,b:"#7a5530",B:"#a57a48",d:"#4a311b",g:"#a9c76a",y:"#e2b04a",l:"#6f8f45",L:"#a9c76a"}},
+  gem:{map:[
+    "...kkkkkk...",
+    "..kCccccCk..",
+    ".kCCcccccck.",
+    "kkkkkkkkkkkk",
+    "kcCCccccccdk",
+    ".kcCcccccdk.",
+    "..kcCcccdk..",
+    "...kccccdk..",
+    "....kccdk...",
+    ".....kdk....",
+    "......k.....",
+    "............"],pal:{k:K,c:"#4fc3b0",C:"#dffff8",d:"#2a7a6c"}},
+  key:{map:[
+    "..kkkk......",
+    ".kyyyyk.....",
+    "kyYkkyyk....",
+    "kyk..kyk....",
+    "kyyk.kyk....",
+    ".kyyyykkkkkk",
+    "..kkkyyyyyyk",
+    ".....kkykyyk",
+    ".......kkkyk",
+    "..........kk",
+    "............",
+    "............"],pal:{k:K,y:"#e2b04a",Y:"#f6dc8a"}},
+  writ:{map:[
+    "............",
+    ".kkkkkkkkk..",
+    "kpPPPPPPPpk.",
+    ".kppppppppk.",
+    ".kpllllllpk.",
+    ".kppppppppk.",
+    ".kpllllpppk.",
+    ".kppppppkkk.",
+    ".kppppppkrrk",
+    "kpPPPPPkrRrk",
+    ".kkkkkkkkrrk",
+    "........kkk."],pal:{k:K,p:"#d8cba6",P:"#efe6c8",l:"#8a7a5a",r:"#b8452e",R:"#e58a6a"}},
+  stone:{map:[
+    "....kkkk....",
+    "...kgGggk...",
+    "..kgGgggsk..",
+    "..kgGvggsk..",
+    "..kgvVvgsk..",
+    "..kgGvggsk..",
+    "..kgGgvgsk..",
+    "..kgGggvsk..",
+    "..kgGgggsk..",
+    ".kmmggggsmk.",
+    "kmMmmmmmmmmk",
+    "kkkkkkkkkkkk"],pal:{k:K,g:"#6c7468",G:"#9aa394",s:"#454c44",v:"#8fd3ff",V:"#e6f7ff",m:"#4f6b34",M:"#8fae55"}},
+  flame:{map:[
+    ".....r......",
+    "....rr......",
+    "....ryr..r..",
+    "...ryyr.rr..",
+    "..rryYyrr...",
+    "..ryYYYyr...",
+    ".rryYWYyrr..",
+    ".ryYWWWYyr..",
+    ".ryYWWWYyr..",
+    "kbrryyyrrbk.",
+    "kBbkbbbkbBk.",
+    ".kkkkkkkkk.."],pal:{k:K,r:"#c8452b",y:"#e88a2e",Y:"#f6c25a",W:"#fff0b8",b:"#5a3e27",B:"#8a6440"}},
+  moon:{map:[
+    "....mmmm....",
+    "..mmMMm.....",
+    ".mMMm.....w.",
+    ".mMm.....wWw",
+    "mMm.......w.",
+    "mMm.........",
+    "mMm.........",
+    "mMMm........",
+    ".mMMm......m",
+    ".mmMMmm..mm.",
+    "..mmmMMmmm..",
+    "....mmmm...."],pal:{m:"#c9c08f",M:"#f6efc8",w:"#d9e2ef",W:"#ffffff"}},
+  owl:{map:[
+    ".k........k.",
+    ".kbk....kbk.",
+    ".kbbkkkkbbk.",
+    "kbbBBbbBBbbk",
+    "kbWWyBBWWybk",
+    "kbWkyBBWkybk",
+    "kbBBBooBBBbk",
+    "kbBBBBoBBBbk",
+    ".kbBBbbBBbk.",
+    ".kbbBbbBbbk.",
+    "..kbbbbbbk..",
+    "...kyykyyk.."],pal:{k:K,b:"#6b4a2b",B:"#9a6f3f",W:"#ece3c7",y:"#e2b04a",o:"#c88a3a"}}
 };
 window.paintIcons = function(root){ (root || document).querySelectorAll('canvas[data-icon]').forEach(cv => { const i = PIX[cv.dataset.icon]; if (i) paintPix(cv, i.map, i.pal); }); };
-(function(){
-  paintPix(document.getElementById('druid'), [
-    "..l......kkk",".lll....kGGGk","lylll..kGGgggk",".lll..kGgkkkgk","..w...kgksesk","..w...kgkssSk","..w..kggkkkkgk","..wkkgggbbbggk","..wsbbgbbBbbgk","..wskbbbBBbbbk",
-    "..w.kbbbyBbbbk","..w.kbyyyyybbk","..w.kbbbBbbbbk","..w.kbbbBbbbbk","..w.kbbBBbbbbk","..w.kbbbbbbbbbk","..w.kkbbbbbbbbk","..w..kkkkkkkkk","..w..kwk...kwk","..k..kkk...kkk"],
-    {k:"#0a120d",G:"#6fae4f",g:"#3f7a3a",s:"#e2b58a",S:"#b9835b",e:"#0a120d",b:"#6b4a2b",B:"#9a6f3f",w:"#8b5a2b",l:"#9bd35a",y:"#f2c94c"});
-  paintPix(document.getElementById('druidmini'), [
-    "..l......kkk",".lll....kGGGk","lylll..kGGgggk",".lll..kGgkkkgk","..w...kgksesk","..w...kgkssSk","..w..kggkkkkgk","..wkkgggbbbggk","..wsbbgbbBbbgk","..wskbbbBBbbbk",
-    "..w.kbbbyBbbbk","..w.kbyyyyybbk","..w.kbbbBbbbbk","..w.kbbbBbbbbk","..w.kbbBBbbbbk","..w.kbbbbbbbbbk","..w.kkbbbbbbbbk","..w..kkkkkkkkk","..w..kwk...kwk","..k..kkk...kkk"],
-    {k:"#0a120d",G:"#6fae4f",g:"#3f7a3a",s:"#e2b58a",S:"#b9835b",e:"#0a120d",b:"#6b4a2b",B:"#9a6f3f",w:"#8b5a2b",l:"#9bd35a",y:"#f2c94c"});
-  const cv = document.getElementById('grove'), c = cv.getContext('2d'), W = 200;
+
+/* gem icon in each gem's own colors */
+window.GEM_TINT = {ruby:["#d23a3a","#ffd0c8","#7a1818"],emerald:["#3fae5a","#d8ffd8","#1c5a2a"],sapphire:["#3a6ad8","#d8e4ff","#1a2e7a"],diamond:["#d6eef6","#ffffff","#7a9aa8"],jade:["#5fae8a","#d8f6e6","#2a5a44"],turquoise:["#3ac0c8","#d8ffff","#1a6a70"],malachite:["#2f8a4a","#9fe0a8","#164a26"],amber:["#e0a03a","#fff0b8","#8a5a12"]};
+window.paintGem = function(cv, kind){ const t = GEM_TINT[kind] || GEM_TINT.diamond; paintPix(cv, PIX.gem.map, {k:K, c:t[0], C:t[1], d:t[2]}); };
+
+/* the druid: hooded, oak staff with mistletoe, a gold sickle at the belt. 24x32 */
+const DRUID = [
+  "........................",
+  ".mM.........kkkk........",
+  "mMmp.......kHHHHkk......",
+  ".mMm......kHhhhhHHk.....",
+  "..km.....kHhLLLhhHHk....",
+  "...W....kHhLkkkkLhHHk...",
+  "...w....kHhkSsssSkhHk...",
+  "...w....kHhksesseskhHk..",
+  "...w....kHhkSsssSkhHk...",
+  "...w....kHHhkSSSkhhHk...",
+  "...w...kHHhhhkkkhhhHHk..",
+  "...w..kHHhhhhhhhhhhhHHk.",
+  "...w.kRHHhhhhhhhhhhHHRk.",
+  "...wkRrrHHhhhhhhhHHrrRk.",
+  "...ssRrrrQHHhhhHHQrrrRk.",
+  "..kssRrrrQrrrrrrrQrrrRk.",
+  "...wkRrrrQrrrrrrrQrrrRk.",
+  "...wkRrrrbbbbbbbbbbrrRk.",
+  "...wkRrrrbbbgGbbbbbrrRk.",
+  "...wkRrrrQrrgGrrrQrrrRk.",
+  "...wkRrrrQrrrgrrrQrrrRk.",
+  "...wkRrrrQrrrrrrrQrrrRk.",
+  "...wkRrrrQrrrrrrrQrrrRk.",
+  "...wkRrrrrQrrrrrQrrrrRk.",
+  "...wkRrrrrQrrrrrQrrrrRk.",
+  "...wkRRrrrrQrrrQrrrrRRk.",
+  "...wkRRrrrrrrrrrrrrrRRk.",
+  "...w.kRRRRRRRRRRRRRRRk..",
+  "...w..kkkkkkkkkkkkkkk...",
+  "...w...kbbk.....kbbk....",
+  "...k...kkkk.....kkkk....",
+  "........................"];
+const DRUID_PAL = {k:K,H:"#2f4a2a",h:"#46663a",L:"#7d9c52",S:"#a8774f",s:"#d9ae84",e:"#0b0f0a",R:"#3e2a1a",r:"#5f4228",Q:"#86603a",b:"#2a1d12",g:"#e2b04a",G:"#fff0b8",w:"#7a5230",W:"#a57a48",m:"#7fa64a",M:"#cfe3a0",p:"#f1efe0"};
+
+function tile(w, h, fn){ const c = document.createElement('canvas'); c.width = w; c.height = h; const x = c.getContext('2d'); fn(x, w, h); return c.toDataURL(); }
+function setTextures(){
+  const root = document.documentElement.style;
+  try {
+    /* woven cloth: a two-over-two weave, barely there */
+    root.setProperty('--cloth', 'url(' + tile(8, 8, (c) => {
+      for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) {
+        const warp = ((x >> 1) + (y >> 1)) & 1;
+        c.fillStyle = warp ? 'rgba(255,240,200,0.045)' : 'rgba(0,0,0,0.10)';
+        c.fillRect(x, y, 1, 1);
+      }
+    }) + ')');
+    /* grain for shadowed panels */
+    seed = 31;
+    root.setProperty('--grain', 'url(' + tile(64, 64, (c) => {
+      for (let i = 0; i < 260; i++) { c.fillStyle = rnd() < 0.7 ? 'rgba(0,0,0,0.22)' : 'rgba(200,220,170,0.05)'; c.fillRect(Math.floor(rnd() * 64), Math.floor(rnd() * 64), 1, 1); }
+    }) + ')');
+    /* forest floor: dithered moss and the odd fallen leaf */
+    seed = 53;
+    root.setProperty('--floor', 'url(' + tile(48, 48, (c) => {
+      c.fillStyle = '#0a110c'; c.fillRect(0, 0, 48, 48);
+      for (let y = 0; y < 48; y++) for (let x = 0; x < 48; x++) {
+        const n = (Math.sin(x * 0.45) + Math.cos(y * 0.38) + Math.sin((x + y) * 0.21)) / 3 * 0.5 + 0.5;
+        if (dith(x, y, n * 0.38)) { c.fillStyle = '#101a12'; c.fillRect(x, y, 1, 1); }
+      }
+      const leaves = ['#3a2a18', '#4f3a1e', '#2f4a2a'];
+      for (let i = 0; i < 7; i++) { const x = Math.floor(rnd() * 46), y = Math.floor(rnd() * 46); c.fillStyle = leaves[i % 3]; c.fillRect(x, y, 2, 1); c.fillRect(x + 1, y + 1, 1, 1); }
+    }) + ')');
+  } catch (e) {}
+}
+
+/* the banner: a moonlit grove in the Ilessan Hills, 320x96 */
+function drawGrove(cv){
+  const c = cv.getContext('2d'), W = 320, H = 96;
   c.imageSmoothingEnabled = false;
-  ["#0d1f2b","#10293a","#163447","#1d4152"].forEach((col, i) => { c.fillStyle = col; c.fillRect(0, i * 7, W, 7); });
-  c.fillStyle = "#24505c"; c.fillRect(0, 28, W, 16);
-  let s = 11; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
-  c.fillStyle = "#d9e8ff"; for (let i = 0; i < 30; i++) c.fillRect(Math.floor(rnd() * W), Math.floor(rnd() * 22), 1, 1);
-  [[1,0,3],[0,1,5],[0,2,5],[0,3,5],[1,4,3]].forEach(([x, y, w]) => { c.fillStyle = "#f6efc8"; c.fillRect(30 + x, 5 + y, w, 1); });
-  c.fillStyle = "#1d4152"; c.fillRect(33, 6, 2, 2);
-  [[1,0,3],[0,1,5],[1,2,3]].forEach(([x, y, w]) => { c.fillStyle = "#d9e2ef"; c.fillRect(170 + x, 9 + y, w, 1); });
-  function pine(x, base, h, col){ c.fillStyle = col; for (let y = 0; y < h; y++) { const half = Math.floor((y % 4 + Math.floor(y / 4) * 2) / 2) + 1; c.fillRect(x - half, base - h + y, half * 2 + 1, 1); } c.fillRect(x, base, 1, 2); }
-  for (let x = 2; x < W; x += 9) pine(x + Math.floor(rnd() * 4), 36, 12 + Math.floor(rnd() * 8), "#14352f");
-  c.fillStyle = "#0f2a22"; c.fillRect(0, 36, W, 8);
-  for (let x = 0; x < W; x += 13) pine(x + Math.floor(rnd() * 6), 43, 16 + Math.floor(rnd() * 10), "#0a1a14");
-  c.fillStyle = "#0a120d"; c.fillRect(0, 42, W, 2);
+  const sky = [[0,'#08101c'],[18,'#0d1a2c'],[36,'#13283a'],[52,'#1c3a48'],[64,'#2a5050']];
+  for (let y = 0; y < H; y++) {
+    let i = 0; while (i < sky.length - 1 && y >= sky[i + 1][0]) i++;
+    const a = sky[i], b = sky[Math.min(i + 1, sky.length - 1)];
+    const t = b[0] > a[0] ? (y - a[0]) / (b[0] - a[0]) : 0;
+    for (let x = 0; x < W; x++) { c.fillStyle = dith(x, y, t) ? b[1] : a[1]; c.fillRect(x, y, 1, 1); }
+  }
+  seed = 11;
+  for (let i = 0; i < 70; i++) { const x = Math.floor(rnd() * W), y = Math.floor(rnd() * 44); c.fillStyle = rnd() < 0.2 ? '#fff6d8' : '#9fb4cc'; c.fillRect(x, y, 1, 1); if (rnd() < 0.08) { c.fillStyle = '#5f7a96'; c.fillRect(x - 1, y, 3, 1); c.fillRect(x, y - 1, 1, 3); c.fillStyle = '#fff6d8'; c.fillRect(x, y, 1, 1); } }
+  function moon(cx, cy, r, lit, mid, dark, craters){
+    for (let y = -r; y <= r; y++) for (let x = -r; x <= r; x++) {
+      const d = x * x + y * y; if (d > r * r) continue;
+      const shade = (x + y * 0.6) / r;
+      c.fillStyle = shade > 0.55 ? dark : shade > 0.05 ? (dith(cx + x, cy + y, (shade - 0.05) / 0.5) ? dark : mid) : lit;
+      if (d > (r - 1) * (r - 1) && shade > 0.2) c.fillStyle = dark;
+      c.fillRect(cx + x, cy + y, 1, 1);
+    }
+    craters.forEach(([x, y, s]) => { c.fillStyle = mid; c.fillRect(cx + x, cy + y, s, s); });
+  }
+  moon(262, 24, 13, '#f2d2bf', '#d9a08a', '#8f5f52', [[-6,-4,2],[-2,3,3],[-8,4,1],[2,-7,2]]);
+  moon(298, 13, 5, '#eef3fa', '#c4cfdc', '#7a8698', [[-2,-1,1]]);
+  function ridge(base, amp, freq, col, off){ for (let x = 0; x < W; x++) { const h = Math.round(base - amp * (0.5 + 0.5 * Math.sin(x * freq + off)) - amp * 0.4 * Math.sin(x * freq * 2.7 + off * 2)); c.fillStyle = col; c.fillRect(x, h, 1, H - h); } }
+  ridge(66, 8, 0.021, '#17303a', 1.3);
+  seed = 5;
+  function fir(x, base, h, col, hi){ for (let y = 0; y < h; y++) { const half = Math.floor((y % 5 + Math.floor(y / 5) * 1.6) / 2.2); c.fillStyle = col; c.fillRect(x - half, base - h + y, half * 2 + 1, 1); if (hi && y % 5 === 2) { c.fillStyle = hi; c.fillRect(x - half, base - h + y, 1, 1); } } c.fillStyle = col; c.fillRect(x, base, 1, 2); }
+  for (let x = 4; x < W; x += 7) fir(x + Math.floor(rnd() * 4), 70, 14 + Math.floor(rnd() * 10), '#13282a', null);
+  for (let y = 58; y < 72; y++) for (let x = 0; x < W; x++) { const t = 1 - Math.abs(y - 65) / 7; if (dith(x + (y & 1) * 2, y, t * 0.42)) { c.fillStyle = '#5c7a78'; c.fillRect(x, y, 1, 1); } }
+  ridge(80, 7, 0.016, '#122318', 4.1);
+  [[118,73,3,7],[124,72,2,8],[131,71,3,9],[139,72,2,8],[145,73,3,7],[128,74,4,2],[136,74,3,2]].forEach(([x, y, w, h]) => { c.fillStyle = '#4a544c'; c.fillRect(x, y - h, w, h); c.fillStyle = '#7d887a'; c.fillRect(x, y - h, 1, h); c.fillStyle = K; c.fillRect(x + w - 1, y - h, 1, h); });
+  function oak(cx, base, r, trunkH){
+    c.fillStyle = '#1a120c'; c.fillRect(cx - 1, base - trunkH, 3, trunkH); c.fillRect(cx - 3, base - 1, 7, 1);
+    const blobs = [[0,-r,r],[-r * 0.8,-r * 0.6,r * 0.75],[r * 0.8,-r * 0.55,r * 0.75],[-r * 0.3,-r * 1.5,r * 0.7],[r * 0.4,-r * 1.4,r * 0.7]];
+    blobs.forEach(([bx, by, br]) => {
+      for (let y = -Math.ceil(br); y <= br; y++) for (let x = -Math.ceil(br); x <= br; x++) {
+        if (x * x + y * y > br * br) continue;
+        const px = Math.round(cx + bx + x), py = Math.round(base - trunkH + by + y);
+        const light = (-x - y) / (br * 1.6);
+        c.fillStyle = light > 0.35 && dith(px, py, light - 0.2) ? '#2f5a32' : dith(px, py, 0.5 + light) ? '#1a3a24' : '#0f2418';
+        c.fillRect(px, py, 1, 1);
+      }
+    });
+  }
+  oak(28, 92, 11, 10); oak(70, 94, 9, 8); oak(206, 93, 10, 9); oak(300, 95, 12, 11); oak(176, 96, 7, 6);
+  c.fillStyle = '#0b130c'; c.fillRect(0, 90, W, 6);
+  seed = 9;
+  for (let x = 0; x < W; x += 2) { if (rnd() < 0.5) { c.fillStyle = rnd() < 0.5 ? '#1f3a20' : '#2f5a2c'; c.fillRect(x, 89 - Math.floor(rnd() * 2), 1, 2); } }
+  for (let i = 0; i < 14; i++) { const x = 10 + Math.floor(rnd() * 300), y = 60 + Math.floor(rnd() * 30); c.fillStyle = '#e9f59a'; c.fillRect(x, y, 1, 1); }
+}
+
+/* the title, in a pixelated uncial hand */
+window.drawTitle = function(){
+  const h1 = document.getElementById('h-title'), cv = document.getElementById('title-art');
+  if (!h1 || !cv) return;
+  const text = 'Hidden Ladders', px = 22;
+  const c = cv.getContext('2d');
+  c.font = px + 'px ' + getComputedStyle(document.documentElement).getPropertyValue('--f-title');
+  const w = Math.ceil(c.measureText(text).width) + 6, h = Math.ceil(px * 1.35);
+  cv.width = w; cv.height = h;
+  const g = cv.getContext('2d');
+  g.font = px + 'px ' + getComputedStyle(document.documentElement).getPropertyValue('--f-title');
+  g.textBaseline = 'alphabetic'; g.fillStyle = '#fff'; g.fillText(text, 2, Math.round(px * 1.02));
+  const img = g.getImageData(0, 0, w, h), d = img.data;
+  const on = new Uint8Array(w * h);
+  for (let i = 0; i < w * h; i++) on[i] = d[i * 4 + 3] > 110 ? 1 : 0;
+  g.clearRect(0, 0, w, h);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    if (!on[y * w + x]) continue;
+    const top = y === 0 || !on[(y - 1) * w + x], left = x === 0 || !on[y * w + x - 1];
+    const t = y / h;
+    g.fillStyle = top || left ? '#fff6d0' : dith(x, y, t * 1.2) ? '#c98f2c' : '#efc35e';
+    g.fillRect(x, y, 1, 1);
+  }
+  h1.classList.add('drawn');
+};
+
+window.paintArt = function(){
+  setTextures();
+  paintPix(document.getElementById('druid'), DRUID, DRUID_PAL);
+  paintPix(document.getElementById('druidmini'), DRUID, DRUID_PAL);
+  drawGrove(document.getElementById('grove'));
   paintIcons();
+  const go = () => { try { drawTitle(); } catch (e) {} };
+  if (document.fonts && document.fonts.load) document.fonts.load('22px "Uncial Antiqua"').then(go, go); else go();
+};
 })();
+
 </script>
 
 <script>
@@ -658,17 +1121,17 @@ const SHOPS = [
   {glyph:'4', metal:'Good', line:'The shop is better appointed than many', nick:'fine shop', q:'quality 14–17', buy:[1255,1575], sell:[373,413], verdict:'A good place to sell. At the very top of this tier it stocks like an incense shop.'},
   {glyph:'3', metal:'Average', line:'laid out in a practical and straightforward manner', nick:'plain shop', q:'quality 8–13', buy:[1023,1289], sell:[304,338], verdict:'Fair prices both ways. Pawn shops start selling magic items around here.'},
   {glyph:'2', metal:'Poor', line:'Sturdy shelves, cobbled together out of scrap lumber', nick:'scrap-wood stall', q:'quality 4–7', buy:[847,1065], sell:[250,276], verdict:'Cheap plain goods. Don’t sell your loot here.'},
-  {glyph:'1', metal:'Worst', line:'Rusty relics lie wherever they were last tossed', nick:'junk shop', q:'quality 1–3', buy:[675,855], sell:[201,222], verdict:'Plain goods for about half price. Never sell here.'}
+  {glyph:'1', metal:'Worst', line:'Rusty relics lie wherever they were last tossed', nick:'junk shop', q:'quality 1–3', buy:[675,855], sell:[201,222], verdict:'Plain goods for about half price. Don’t sell here.'}
 ];
 
 const FAMS = {
-  Undead:['Graveward','The Warden','Aegis of Dawn','The Visor of King Lysandus'],
-  Daedra:['Warp-Edge','Orsinium’s Anvil','The Amulet of the Nine'],
+  Undead:['Graveward','The Warden','Aegis of Dawn','The Visor of King Lysandus','The Pilgrim’s Sandals'],
+  Daedra:['Warp-Edge','Orsinium’s Anvil','The Amulet of the Nine','The Vestments of Stendarr'],
   Dragon:['Wyrmbane','The Mountain’s Root'],
-  Beast:['Stormcaller’s Bow','The Glenmoril Bow','Foxglove','The Mark of the Hist'],
-  Brute:['Titanheart','Gortwog’s Cleaver','The Reachman’s Torc'],
-  Caster:['The Direnni Staff','Archmage’s Loop','Worm’s Tooth','The Witch-Sisters’ Ring'],
-  Rogue:['Nightwhisper','Tsaesci Fang','The Night Mother’s Embrace','The Wayrest Courier’s Treads'],
+  Beast:['Stormcaller’s Bow','The Glenmoril Bow','Foxglove','The Mark of the Hist','The Alik’r Wayfarer’s Robes'],
+  Brute:['Titanheart','Gortwog’s Cleaver','The Reachman’s Torc','The Wrothgar Pass Mantle'],
+  Caster:['The Direnni Staff','Archmage’s Loop','Worm’s Tooth','The Witch-Sisters’ Ring','The Silks of Queen Barenziah','The Eye of Magnus','The Ring of Artaeum','Shalidor’s Brand'],
+  Rogue:['Nightwhisper','Tsaesci Fang','The Night Mother’s Embrace','The Wayrest Courier’s Treads','The Shade’s Cowl'],
   Warrior:['Ansei’s Edge','Gauntlets of the Rose','The Raven’s Wings','The Wall of Daggerfall','King’s Mark','The Duelist’s Vambrace']
 };
 const FAM_KEYS = Object.keys(FAMS);
@@ -710,9 +1173,9 @@ const RARITY = [
   {id:'magic', label:'Magic', c:'--r1', word:'one or two lines'},
   {id:'rare', label:'Rare', c:'--r2', word:'three or four lines, a two-part name'},
   {id:'legendary', label:'Legendary', c:'--r3', word:'a named record with its own power'},
-  {id:'aetheric', label:'Aetheric', c:'--r4', word:'a boss’s set piece, never rolled'},
+  {id:'aetheric', label:'Aetheric', c:'--r4', word:'a boss’s set piece, not rolled'},
   {id:'artifact', label:'Artifact', c:'--r5', word:'Daggerfall’s own, from quests and princes'},
-  {id:'gilded', label:'Gilded', c:'--r6', word:'one item, the Hourlock'}
+  {id:'gilded', label:'Gilded', c:'--r6', word:'three named pieces from world bosses'}
 ];
 const W = {magic:{base:100, per:15, cap:600}, rare:{base:15, per:6, cap:260}, legendary:{base:1, per:1.2, cap:45}};
 const SRC_MULT = {corpse:1, pile:1.3, boss:2.5};
@@ -789,11 +1252,11 @@ DRAWS.forEach(([id,n,c]) => BIND_ALL[id] = {n, c, kind:'give'});
 SOULS.forEach(([id,n,c,extra,fg,forced]) => BIND_ALL[id] = {n:n + '’s soul', c, kind:'give', extra, fg, forced});
 
 const STAGES = [
-  {name:'Faint', lo:1, hi:9, kept:62.5, heal:8, rp:3},
-  {name:'Kindled', lo:10, hi:19, kept:68.75, heal:9, rp:4.5},
-  {name:'Bright', lo:20, hi:29, kept:75, heal:10, rp:6},
-  {name:'Radiant', lo:30, hi:39, kept:81.25, heal:11, rp:7.5},
-  {name:'Ascendant', lo:40, hi:50, kept:87.5, heal:12, rp:9}
+  {name:'Faint', lo:1, hi:9, kept:62.5, heal:3, rp:1},
+  {name:'Kindled', lo:10, hi:19, kept:68.75, heal:3.5, rp:1.5},
+  {name:'Bright', lo:20, hi:29, kept:75, heal:4, rp:2},
+  {name:'Radiant', lo:30, hi:39, kept:81.25, heal:4.5, rp:2.5},
+  {name:'Ascendant', lo:40, hi:50, kept:87.5, heal:5, rp:3}
 ];
 const xpFor = (L) => { const n = Math.max(1, Math.min(50, L)) - 1; return 10 * Math.floor((n*n*n*(n+10) + 300*n) / 30); };
 const killXp = (foeL, R) => Math.floor(10 * Math.min(Math.max(1, Math.min(30, foeL)), R + 3) * 75 / 100);
@@ -818,14 +1281,17 @@ const wallMs = (gm) => EPOCH_MS + (gm - EPOCH_MIN) * 60000 / 12;
 
 const LADDERS = [
   {id:'counter', icon:'coin', name:'Shops'},
-  {id:'descent', icon:'door', name:'Dungeons'},
+  {id:'market', icon:'town', name:'Towns'},
+  {id:'descent', icon:'cave', name:'Dungeons'},
   {id:'forge', icon:'anvil', name:'Metals'},
-  {id:'harvest', icon:'gem', name:'Loot'},
+  {id:'harvest', icon:'pouch', name:'Loot'},
+  {id:'gems', icon:'gem', name:'Gems'},
   {id:'doors', icon:'key', name:'Guilds'},
-  {id:'binding', icon:'rune', name:'Enchanting'},
+  {id:'writs', icon:'writ', name:'Writs'},
+  {id:'binding', icon:'stone', name:'Enchanting'},
   {id:'kindling', icon:'flame', name:'Level'},
   {id:'wheel', icon:'moon', name:'Calendar'},
-  {id:'test', icon:'question', name:'Quiz'}
+  {id:'test', icon:'owl', name:'Quiz'}
 ];
 
 const OMENS = [
@@ -843,10 +1309,17 @@ const OMENS = [
   'The Merchants Festival halves every price outside the guilds.',
   'Stendarr at rank 9 ignores almost one death in five.',
   'Rare drops come unidentified, and their lines already work.',
-  'The Thieves Guild never expels you.',
+  'The Thieves Guild doesn’t expel anyone.',
   'From character level 19 almost nothing weak spawns.',
   'A daedric tower shield holds 4,500 points of enchantment.',
-  'The highest-Renown member of a party should host.'
+  'The highest-Renown member of a party should host.',
+  'A booming town pays less for loot, not more. Sell where the economy reads near 50.',
+  'An hour in a town’s streets each day props up its economy.',
+  'Unsetting a gem destroys it. Extracting it whole costs 50 to 800 gold.',
+  'Two Perfect Diamonds fill a weapon’s damage cap.',
+  'Crafting writs turn over at midnight UTC.',
+  'Only potions you brewed yourself fill a writ.',
+  'A Novice’s brew makes two potions now.'
 ];
 
 // ── ogham ───────────────────────────────────────────────────────
@@ -866,7 +1339,7 @@ function ogham(name){
 
 // ── state ───────────────────────────────────────────────────────
 const KEY = 'hidden-ladders-gen2';
-const DEF = {luck:50, level:12, renown:15, veil:false, shop:0, seek:'metal', fam:'', dun:7, metal:2, src:'wraith', drought:0, recent:[], tally:{common:0, magic:0, rare:0, legendary:0}, rank:5, item:'Amulet', emetal:9, bind:['s-lord','p-regen','p-mag-daedra','p-rep-all'], party:1, seeds:{}, best:0, marks:{}};
+const DEF = {luck:50, level:12, renown:15, veil:false, shop:0, seek:'metal', fam:'', dun:7, metal:2, src:'wraith', drought:0, recent:[], tally:{common:0, magic:0, rare:0, legendary:0}, rank:5, item:'Amulet', emetal:9, bind:['s-lord','p-regen','p-mag-daedra','p-rep-all'], party:1, seeds:{}, best:0, marks:{}, prosp:76, walk:60, sales:0, raids:0, gem:'diamond', grade:'perfect'};
 let S = JSON.parse(JSON.stringify(DEF));
 function load(){ try { const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; } catch (e) { return null; } }
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
@@ -877,6 +1350,8 @@ function adopt(o){
   S.luck = cl(S.luck, 1, 100, 50); S.level = cl(S.level, 1, 30, 12); S.renown = cl(S.renown, 1, 50, 15);
   S.shop = cl(S.shop, 0, 4, 0); S.metal = cl(S.metal, 0, 9, 2); S.rank = cl(S.rank, 1, 9, 5); S.emetal = cl(S.emetal, 0, 9, 9); S.party = cl(S.party, 1, 8, 1);
   S.drought = cl(S.drought, 0, 100000, 0);
+  S.prosp = cl(S.prosp, 0, 100, 76); S.walk = cl(S.walk, 0, 60, 60); S.sales = cl(S.sales, 0, 10, 0); S.raids = cl(S.raids, 0, 1, 0);
+  if (!GEMS.includes(S.gem)) S.gem = 'diamond'; if (!GRADES.includes(S.grade)) S.grade = 'perfect';
   if (!DUN.some(r => r[0] === S.dun)) S.dun = 7;
   if (!SOURCES.some(s => s.id === S.src)) S.src = 'wraith';
   if (!['metal','magic','daedra'].includes(S.seek)) S.seek = 'metal';
@@ -933,13 +1408,13 @@ function renderSigil(){
   $('#r-renown').textContent = 'Stage: ' + st.name + '. +' + (3 * (S.renown - 1)) + ' health and +' + (2 * (S.renown - 1)) + ' magicka online.';
 }
 function renderGrove(){
-  $('#seeds').innerHTML = LADDERS.map(l => '<a class="seed' + (S.seeds[l.id] ? ' lit' : '') + '" href="#' + l.id + '" aria-label="' + esc(l.name) + (S.seeds[l.id] ? ', explored' : ', not explored yet') + '" title="' + esc(l.name) + '"><canvas data-icon="' + l.icon + '" width="9" height="9"></canvas></a>').join('');
+  $('#seeds').innerHTML = LADDERS.map(l => '<a class="seed' + (S.seeds[l.id] ? ' lit' : '') + '" href="#' + l.id + '" aria-label="' + esc(l.name) + (S.seeds[l.id] ? ', explored' : ', not explored yet') + '" title="' + esc(l.name) + '"><canvas data-icon="' + l.icon + '" width="12" height="12"></canvas></a>').join('');
   paintIcons($('#seeds'));
   document.querySelectorAll('#stavenav a').forEach(a => a.classList.toggle('lit', !!S.seeds[a.dataset.id]));
   const n = LADDERS.filter(l => S.seeds[l.id]).length;
   $('#grove-read').textContent = n === 0 ? 'Use any tool below to light up its icon.'
     : n < LADDERS.length ? n + ' of ' + LADDERS.length + ' explored.'
-    : 'All 9 explored. Share one thing you learned with the guild.';
+    : 'All ' + LADDERS.length + ' explored. Share one thing you learned with the guild.';
 }
 function renderOmen(){
   const day = Math.floor(Date.now() / 86400000);
@@ -961,9 +1436,9 @@ function renderCounter(){
     '<h3>Tier ' + s.glyph + ': ' + s.metal + ' (' + s.nick + ')</h3>' +
     '<p class="verdict">' + s.verdict + '</p>' +
     '<div><span class="label">Weapons on the shelf at Luck ' + S.luck + '</span>' + spectrum(w) + '</div>' +
-    '<dl class="kv"><dt>Mithril or better</dt><dd class="num">' + (mith > 0 ? pc(mith) : 'never') + '</dd><dt>Armour that’s plate</dt><dd class="num">' + pc(plate) + '</dd></dl>' +
+    '<dl class="kv"><dt>Mithril or better</dt><dd class="num">' + (mith > 0 ? pc(mith) : 'none') + '</dd><dt>Armour that’s plate</dt><dd class="num">' + pc(plate) + '</dd></dl>' +
     '<div class="worth"><label class="label" for="worth">An item worth</label><input id="worth" type="number" min="1" step="50" inputmode="numeric" value="' + v + '"><span class="label">gold</span></div>' +
-    '<div class="price" id="price"></div><p class="vstat">Ranges run from a sharp haggler to a dull one. Each region drifts between 75% and 125% of these, day to day.</p>';
+    '<div class="price" id="price"></div><p class="vstat">Ranges run from a sharp haggler to a dull one, at a region\u2019s usual prices. Each region drifts every game day (2 real hours), mostly between 60% and 130% of these, and a town\u2019s economy moves them again.</p>';
   renderPrice();
 }
 function renderPrice(){
@@ -1004,7 +1479,7 @@ function dunDetail(r){
   return '<div class="ddetail">' +
     '<p class="vstat"><b>Strongest foes here</b> (common from level 15): ' + r[6].join(', ') + '.</p>' +
     '<p class="vstat"><b>Bring</b> ' + bringTxt + '</p>' +
-    '<div><span class="label">Metal drops at Luck ' + S.luck + (r[2] < 0 ? ', level ' + S.level : '') + ' &middot; mithril or better ' + (mith > 0 ? pc(mith) : 'never') + '</span>' + spectrum(dist) + '</div>' +
+    '<div><span class="label">Metal drops at Luck ' + S.luck + (r[2] < 0 ? ', level ' + S.level : '') + ' &middot; mithril or better ' + (mith > 0 ? pc(mith) : 'none') + '</span>' + spectrum(dist) + '</div>' +
     '<p class="vstat"><b>A treasure pile here</b> at your Luck: Magic or better <b class="num">' + pc(c.magic / 10) + '</b>, Rare or better <b class="num">' + pc(c.rare / 10) + '</b>, Legendary <b class="num">' + pc(c.legendary / 10, 1) + '</b>.</p>' +
     fam + '</div>';
 }
@@ -1241,7 +1716,12 @@ const GEN = [
     const [what, r] = pick(F); const opts = shuffle([r, ...shuffle([1,2,3,4,5,6,7,8,9].filter(x => x !== r)).slice(0, 3)]); return {q:'At what rank can you ' + what + '?', opts: opts.map(o => ({t:'Rank ' + o, ok:o === r})), why:'Rank ' + r + '. Each rank needs reputation of ten times the rank, plus two guild skills.'}; },
   () => { const fam = pick(FAM_KEYS), name = pick(FAMS[fam]); const right = pick(DUN.filter(r => r[5] === fam)); const wrong = shuffle(DUN.filter(r => r[5] && r[5] !== fam)).filter((r, i, a) => a.findIndex(x => x[5] === r[5]) === i).slice(0, 3);
     return {q:'You want ' + name + '. Which place leans toward it?', opts:[right, ...wrong].map(r => ({t:r[1], ok:r === right})), why:name + ' is a ' + fam + ' Legendary. ' + fam + ' places and foes are five times likelier to drop it.'}; },
-  () => { let a, b; do { [a, b] = two(10); } while (MET_ROOM[a] === MET_ROOM[b]); return {q:'Which metal holds more enchantment?', opts:[a, b].map(i => ({t:MET[i], ok:MET_ROOM[i] === Math.max(MET_ROOM[a], MET_ROOM[b])})), why:MET[a] + ' ×' + MET_ROOM[a] + ', ' + MET[b] + ' ×' + MET_ROOM[b] + '. Silver and adamantium hold more than mithril.'}; }
+  () => { let a, b; do { [a, b] = two(10); } while (MET_ROOM[a] === MET_ROOM[b]); return {q:'Which metal holds more enchantment?', opts:[a, b].map(i => ({t:MET[i], ok:MET_ROOM[i] === Math.max(MET_ROOM[a], MET_ROOM[b])})), why:MET[a] + ' ×' + MET_ROOM[a] + ', ' + MET[b] + ' ×' + MET_ROOM[b] + '. Silver and adamantium hold more than mithril.'}; },
+  () => { const g = pick(GEMS); const others = shuffle(GEMS.filter(x => x !== g && GEM_W[x][0](8) !== GEM_W[g][0](8))).slice(0, 3); return {q:'A Perfect ' + GEM_NAME[g] + ' goes into a weapon socket. What does it add?', opts:[g, ...others].map(k => ({t:gemLine(GEM_W, k, 4), ok:k === g})), why:'A Perfect ' + GEM_NAME[g] + ' adds ' + gemLine(GEM_W, g, 4) + ' in a weapon, or ' + gemLine(GEM_O, g, 4) + ' in armor or jewelry.'}; },
+  () => ({q:'Which of these props up a town’s economy?', opts:[{t:'Spending time in its streets', ok:true},{t:'Selling loot to its shops', ok:false},{t:'Buying spells at its Mages Guild', ok:false},{t:'Renting a room at its inn', ok:false}], why:'Money doesn’t move a town. Time in its streets, player-market sales made there and raids driven off its gates do.'}),
+  () => { const hi = pick([86, 90, 95]), lo = pick([10, 14, 20]); return {q:'Three towns, same shop quality. Where do you sell your loot?', opts:[{t:'Economy ' + hi + ', Booming', ok:false},{t:'Economy 50, Steady', ok:true},{t:'Economy ' + lo + ', Destitute', ok:false}], why:'Shops pay the most at 50. A booming town pays ' + Math.round((1 - payF(hi)) * 100) + '% less, a destitute one ' + Math.round((1 - payF(lo)) * 100) + '% less.'}; },
+  () => ({q:'Which potion fills a crafting writ?', opts:[{t:'One you brewed at a station', ok:true},{t:'One you bought from an alchemist', ok:false},{t:'One you looted from a foe', ok:false},{t:'Any Water Breathing potion', ok:false}], why:'Only brews you made count, and Water Breathing and Levitation are left out of writs.'}),
+  () => ({q:'You unset a Perfect Diamond from its socket. What happens to it?', opts:[{t:'It shatters', ok:true},{t:'It goes back to your pack', ok:false},{t:'It drops a grade', ok:false},{t:'The smith keeps it', ok:false}], why:'Unsetting destroys the gem. Paying to extract it keeps it whole: 800 gold for a Perfect one.'})
 ];
 function newTrial(){
   current = pick(GEN)(); current.opts = shuffle(current.opts); current.done = false;
@@ -1274,9 +1754,94 @@ function answer(i){
   save(); renderStreak();
 }
 
+
+// ── Gen 4: towns ────────────────────────────────────────────────
+const BANDS = [['Destitute',0],['Struggling',15],['Steady',35],['Thriving',65],['Booming',85]];
+const bandOf = (p) => BANDS.slice().reverse().find(([, lo]) => p >= lo)[0];
+const askF = (p) => 1 - 0.25 * (p - 50) / 50;
+const payF = (p) => Math.min(1 - 0.25 * Math.abs(p - 50) / 50, askF(p));
+const KEEP14 = Array.from({length:14}, (_, k) => Math.pow(0.8, k)).reduce((a, b) => a + b, 0);
+const shareOf = (a) => a > 0 ? 30 * a / (a + 150) : 0;
+function renderTowns(){
+  const p = S.prosp;
+  $('#t-prosp').value = p; $('#o-prosp').textContent = p;
+  $('#t-walk').value = S.walk; $('#o-walk').textContent = S.walk;
+  $('#t-sales').value = S.sales; $('#o-sales').textContent = S.sales;
+  $('#t-raids').value = S.raids; $('#o-raids').textContent = S.raids;
+  const band = bandOf(p);
+  $('#bandrow').innerHTML = BANDS.map(([n, lo]) => '<span class="' + (n === band ? 'on' : '') + '">' + n + ' ' + lo + '+</span>').join('');
+  const a = askF(p), y = payF(p), ap = Math.round(Math.abs(1 - a) * 100), yp = Math.round((1 - y) * 100);
+  $('#factor').innerHTML =
+    '<div><span class="label">Shops ask</span><span class="v num ' + (a < 1 ? 'up' : a > 1 ? 'down' : '') + '">' + (ap === 0 ? 'usual' : (a < 1 ? '−' : '+') + ap + '%') + '</span><small>' + (a < 1 ? 'cheaper to buy here' : a > 1 ? 'dearer to buy here' : 'the region’s usual prices') + '</small></div>' +
+    '<div><span class="label">Shops pay</span><span class="v num ' + (yp ? 'down' : 'up') + '">' + (yp ? '−' + yp + '%' : 'full') + '</span><small>' + (yp ? 'less for what you sell' : 'the best a town pays') + '</small></div>';
+  const s = SHOPS[0];
+  $('#townprice').innerHTML = 'A 1,000-gold item at an incense shop here: you pay <b class="num">' + fmt(s.buy[0] * a) + '–' + fmt(s.buy[1] * a) + '</b>, they pay you <b class="num">' + fmt(s.sell[0] * y) + '–' + fmt(s.sell[1] * y) + '</b>.';
+  const day = Math.min(60, S.walk) / 2 + 4 * S.sales + 20 * S.raids;
+  const first = shareOf(day), steady = shareOf(day * KEEP14);
+  $('#townshare').innerHTML = day ? 'That adds about <b class="num">+' + first.toFixed(1) + '</b> after one day, and settles near <b class="num">+' + steady.toFixed(1) + '</b> after two weeks of the same.' : 'Nobody visiting adds nothing. The town drifts on its own waves.';
+}
+
+// ── Gen 4: gems ─────────────────────────────────────────────────
+const GEMS = ['ruby','emerald','sapphire','diamond','jade','turquoise','malachite','amber'];
+const GEM_NAME = {ruby:'Ruby',emerald:'Emerald',sapphire:'Sapphire',diamond:'Diamond',jade:'Jade',turquoise:'Turquoise',malachite:'Malachite',amber:'Amber'};
+const GRADES = ['chipped','flawed','plain','flawless','perfect'];
+const GRADE_NAME = ['Chipped','Flawed','Plain','Flawless','Perfect'];
+const GRADE_PRICE = [0.25, 0.5, 1, 2, 4];
+const EXTRACT = [50, 100, 200, 400, 800];
+const GEM_BASE = {ruby:250, emerald:425, sapphire:375, diamond:500, jade:10, turquoise:50, malachite:25, amber:100};
+const GEM_W = {
+  ruby:[(n) => '+' + n + ' fire damage a hit',[1,2,3,4,6]], emerald:[(n) => n + '% of each hit healed',[1,2,3,5,7]],
+  sapphire:[(n) => '+' + n + ' frost damage a hit',[1,2,3,4,6]], diamond:[(n) => '+' + n + '% damage',[2,4,6,9,12]],
+  jade:[(n) => '+' + n + ' Willpower',[1,2,4,6,8]], turquoise:[(n) => '+' + n + ' Agility',[1,2,4,6,8]],
+  malachite:[(n) => '+' + n + ' Strength',[1,2,4,6,8]], amber:[(n) => '+' + n + ' Speed',[1,2,4,6,8]]
+};
+const GEM_O = {
+  ruby:[(n) => '+' + n + ' fire resist',[4,7,10,15,20]], emerald:[(n) => '+' + n + ' poison resist',[4,7,10,15,20]],
+  sapphire:[(n) => '+' + n + ' frost resist',[4,7,10,15,20]], diamond:[(n) => '+' + n + ' magic resist',[4,7,10,15,20]],
+  jade:[(n) => '+' + n + ' Willpower',[1,2,4,6,8]], turquoise:[(n) => '+' + n + ' Personality',[1,2,4,6,8]],
+  malachite:[(n) => '+' + n + ' Endurance',[1,2,4,6,8]], amber:[(n) => '+' + n + ' Luck',[1,2,3,4,6]]
+};
+const GRADE_FROM = ['places and foes of tier 0 to 9','tier 0 to 14','tier 5 to 19','tier 10 and up: a quarter of gems at 10, half at 15, 60% from 20','tier 15 and up: 15% of gems at 15, 40% from 20'];
+const gemLine = (t, g, i) => t[g][0](t[g][1][i]);
+const gemPrice = (g, i) => Math.max(1, Math.round(GEM_BASE[g] * GRADE_PRICE[i]));
+function renderGems(){
+  const g = S.gem, i = GRADES.indexOf(S.grade);
+  $('#gemkinds').innerHTML = GEMS.map(k => '<button type="button" class="gemkind" data-act="gemkind" data-k="' + k + '" aria-pressed="' + (k === g) + '"><canvas data-gem="' + k + '" width="12" height="12" aria-hidden="true"></canvas>' + GEM_NAME[k] + '</button>').join('');
+  document.querySelectorAll('#gemkinds canvas[data-gem]').forEach(cv => paintGem(cv, cv.dataset.gem));
+  $('#gemgrades').innerHTML = GRADES.map((k, j) => '<button type="button" class="chip" data-act="gemgrade" data-k="' + k + '" aria-pressed="' + (j === i) + '" style="display:grid;gap:2px;text-align:center;padding:6px 4px"><b class="num" style="font-size:1.2rem">' + gemPrice(g, j) + '</b><span style="font-size:.8rem">' + GRADE_NAME[j] + '</span></button>').join('');
+  const name = (i === 2 ? '' : GRADE_NAME[i] + ' ') + GEM_NAME[g];
+  $('#gemlines').innerHTML = '<div><span class="label">In a weapon</span><span class="v num">' + gemLine(GEM_W, g, i) + '</span><small>' + name + '</small></div><div><span class="label">In armor or jewelry</span><span class="v num">' + gemLine(GEM_O, g, i) + '</span><small>' + name + '</small></div>';
+  const base = gemPrice(g, i), s = SHOPS[0];
+  $('#gemkv').innerHTML = '<dt>Its value</dt><dd class="num">' + fmt(base) + ' gold</dd>' +
+    '<dt>An incense shop pays</dt><dd class="num">' + fmt(base * s.sell[0] / 1000) + '–' + fmt(base * s.sell[1] / 1000) + ' gold</dd>' +
+    '<dt>Extract it whole</dt><dd class="num">' + fmt(EXTRACT[i]) + ' gold</dd>' +
+    '<dt>Drops from</dt><dd>' + GRADE_FROM[i] + '; bosses count 4 tiers deeper</dd>';
+}
+
+// ── Gen 4: crafting writs ───────────────────────────────────────
+const WRIT_TIERS = [
+  {t:1, rank:0, potions:'Orc Strength, Stamina, Healing, Water Walking', dishes:'Hunter’s Stew, Fisherman’s Supper', kits:'Iron'},
+  {t:2, rank:10, potions:'Resist Fire, Frost, Shock; Restore Power', dishes:'Orchard Tart', kits:'Steel'},
+  {t:3, rank:25, potions:'Slow Falling, Cure Disease, Heal True', dishes:'', kits:'Silver'},
+  {t:4, rank:40, potions:'Resist Poison, Free Action', dishes:'', kits:'Elven, Dwarven'},
+  {t:5, rank:55, potions:'Chameleon Form, Shadow Form, Cure Poison', dishes:'', kits:'Mithril'},
+  {t:6, rank:70, potions:'Invisibility', dishes:'Feast of the Hearth', kits:'Adamantium, Ebony, Orcish'},
+  {t:7, rank:90, potions:'Purification', dishes:'', kits:''}
+];
+const potQty = (t) => t <= 2 ? 4 : t <= 4 ? 3 : 2;
+const kitQty = (t) => t <= 3 ? 3 : t <= 5 ? 2 : 1;
+function renderWrits(){
+  $('#writtable').innerHTML = '<thead><tr><th>Tier</th><th class="r">Rank</th><th>Potions</th><th>Dishes</th><th>Repair Kits</th><th class="r">Least pay</th></tr></thead><tbody>' +
+    WRIT_TIERS.map(w => '<tr><td class="num">' + w.t + '</td><td class="r num">' + w.rank + '</td>' +
+      '<td>' + w.potions + ' <span class="num" style="color:var(--gold)">&times;' + potQty(w.t) + '</span></td>' +
+      '<td' + (w.dishes ? '' : ' class="dimmed"') + '>' + (w.dishes ? w.dishes + ' <span class="num" style="color:var(--gold)">&times;' + (w.t >= 6 ? 1 : 3) + '</span>' : '&mdash;') + '</td>' +
+      '<td' + (w.kits ? '' : ' class="dimmed"') + '>' + (w.kits ? w.kits + ' <span class="num" style="color:var(--gold)">&times;' + kitQty(w.t) + '</span>' : '&mdash;') + '</td>' +
+      '<td class="r num">' + (20 * w.t) + '</td></tr>').join('') + '</tbody>';
+}
+
 // ── wiring ──────────────────────────────────────────────────────
 function renderAll(){
-  renderSigil(); renderGrove(); renderCounter(); renderDescent(); renderForge(); renderHarvest(); renderDoors(); renderBinding(); renderKindling(); renderWheel(); renderStreak();
+  renderSigil(); renderGrove(); renderCounter(); renderTowns(); renderDescent(); renderForge(); renderHarvest(); renderGems(); renderDoors(); renderWrits(); renderBinding(); renderKindling(); renderWheel(); renderStreak();
 }
 function onLuckish(){ renderSigil(); renderCounter(); renderDescent(); renderHarvest(); renderKindling(); save(); }
 
@@ -1298,6 +1863,8 @@ document.addEventListener('click', (e) => {
   else if (a === 'bind') { const k = t.dataset.k, i = S.bind.indexOf(k); const used = S.bind.length + sum(S.bind.map(id => BIND_ALL[id].extra || 0)); if (i >= 0) S.bind.splice(i, 1); else if (used + 1 + (BIND_ALL[k].extra || 0) <= 10) S.bind.push(k); save(); plant('binding'); renderBinding(); }
   else if (a === 'party') { S.party = +t.dataset.n; save(); plant('kindling'); renderKindling(); }
   else if (a === 'mark') { const k = t.dataset.k; if (S.marks[k]) delete S.marks[k]; else S.marks[k] = 1; save(); plant('wheel'); renderWheel(); if (S.marks[k]) toast('Marked.'); }
+  else if (a === 'gemkind') { S.gem = t.dataset.k; save(); plant('gems'); renderGems(); }
+  else if (a === 'gemgrade') { S.grade = t.dataset.k; save(); plant('gems'); renderGems(); }
   else if (a === 'ans') answer(+t.dataset.i);
   else if (a === 'next') newTrial();
 });
@@ -1305,13 +1872,15 @@ document.addEventListener('click', (e) => {
   $('#sig-' + k).addEventListener('input', (e) => { S[k] = +e.target.value; if (k === 'level') { renderSigil(); renderDescent(); renderKindling(); renderCarry(); save(); } else onLuckish(); });
 });
 document.addEventListener('input', (e) => { if (e.target.id === 'worth') { renderPrice(); plant('counter'); } });
+[['t-prosp','prosp'],['t-walk','walk'],['t-sales','sales'],['t-raids','raids']].forEach(([id, k]) => $('#' + id).addEventListener('input', (e) => { S[k] = +e.target.value; save(); plant('market'); renderTowns(); }));
 $('#ench-item').addEventListener('change', (e) => { S.item = e.target.value; save(); plant('binding'); renderBinding(); });
 $('#ench-metal').addEventListener('change', (e) => { S.emetal = +e.target.value; save(); plant('binding'); renderBinding(); });
 
 function start(data){
+  try { paintArt(); } catch (e) {}
   adopt(load());
   if (data && typeof data === 'object' && data.S) { adopt(data.S); streak = data.streak | 0; }
-  $('#stavenav').innerHTML = LADDERS.map(l => '<a href="#' + l.id + '" data-id="' + l.id + '" title="' + esc(l.name) + '"><canvas data-icon="' + l.icon + '" width="9" height="9" aria-hidden="true"></canvas><span>' + esc(l.name) + '</span></a>').join('');
+  $('#stavenav').innerHTML = LADDERS.map(l => '<a href="#' + l.id + '" data-id="' + l.id + '" title="' + esc(l.name) + '"><canvas data-icon="' + l.icon + '" width="12" height="12" aria-hidden="true"></canvas><span>' + esc(l.name) + '</span></a>').join('');
   paintIcons($('#stavenav'));
   initBinding(); renderRarities(); renderOmen();
   renderAll(); newTrial();
@@ -1321,6 +1890,5 @@ if (window.claude && window.claude.hot && window.claude.hot.snapshot) { try { wi
 if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(start); else start((window.claude && window.claude.hot && window.claude.hot.data) || {});
 })();
 </script>
-
 </body>
 </html>
